@@ -2,16 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="31e68778-827f-434d-b385-635231b328b0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/hotswap_agent.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NCTaskManager.iml" beforeDir="false" afterPath="$PROJECT_DIR$/NCTaskManager.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ua/edu/sundu/j2se/studentHvostin/tasks/ArrayTaskList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ua/edu/sundu/j2se/studentHvostin/tasks/ArrayTaskList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ua/edu/sundu/j2se/studentHvostin/tasks/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ua/edu/sundu/j2se/studentHvostin/tasks/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ua/edu/sundu/j2se/studentHvostin/tasks/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ua/edu/sundu/j2se/studentHvostin/tasks/Task.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NCTaskManager/ua/edu/sundu/j2se/studentHvostin/tasks/ArrayTaskList.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NCTaskManager/ua/edu/sundu/j2se/studentHvostin/tasks/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NCTaskManager/ua/edu/sundu/j2se/studentHvostin/tasks/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NCTaskManager/ua/edu/sundu/j2se/studentHvostin/tasks/Task.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NCTaskManager/ua/edu/sundu/j2se/studentHvostin/tasks/Task.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +66,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1630832044677</updated>
-      <workItem from="1630832047529" duration="2954000" />
+      <workItem from="1630832047529" duration="4416000" />
     </task>
     <servers />
   </component>
