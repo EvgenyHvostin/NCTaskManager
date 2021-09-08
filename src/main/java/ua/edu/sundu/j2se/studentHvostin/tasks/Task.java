@@ -2,12 +2,12 @@ package ua.edu.sundu.j2se.studentHvostin.tasks;
 
 public class Task  {
 
-    String title;
-    int time;
-    int start;
-    int end;
-    int interval;
-    boolean active;
+    private String title;
+    private int time;
+    private int start;
+    private int end;
+    private int interval;
+    private boolean active;
 
     public Task (final String title, final int time) {
         this.title = title;
@@ -98,8 +98,8 @@ public class Task  {
             do {
                 time += this.interval;
             }
-            while (this.time < current);
-            return this.time;
+            while (time < current);
+            return time;
         } else {
             return getStartTime();
         }
