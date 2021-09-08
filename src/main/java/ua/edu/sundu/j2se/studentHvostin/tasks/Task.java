@@ -9,13 +9,13 @@ public class Task  {
     int interval;
     boolean active;
 
-     public void Task (final String title, final int time) {
+    public Task (final String title, final int time) {
         this.title = title;
         this.time = time;
         this.active = false;
     }
 
-    public void Task (final String title, final int start, final int end, final int interval) {
+    public Task (final String title, final int start, final int end, final int interval) {
         this.title = title;
         this.start = start;
         this.end = end;
@@ -49,6 +49,7 @@ public class Task  {
 
     void setTime(final int time) {
         this.time = time;
+        this.interval = 0;
     }
 
     int getStartTime() {
@@ -80,6 +81,7 @@ public class Task  {
         this.end = end;
         this.interval = interval;
     }
+
     boolean isRepeated() {
         if (this.interval > 0) {
             return true;
