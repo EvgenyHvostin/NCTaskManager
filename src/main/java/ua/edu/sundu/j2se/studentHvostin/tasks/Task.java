@@ -9,92 +9,96 @@ public class Task  {
     int interval;
     boolean active;
 
-     public void Task (final String title, final int time) {
-        this.title = title;
-        this.time = time;
+     public void Task (final String TITLE, final int TIME) {
+        this.title = TITLE;
+        this.time = TIME;
+        this.active = false;
     }
 
-    public void Task (final String title, final int start, final int end, final int interval) {
-        this.title = title;
-        this.start = start;
-        this.end = end;
+    public void Task (final String TITLE, final int START, final int END, final int INTERVAL) {
+        this.title = TITLE;
+        this.start = START;
+        this.end = END;
+        this.interval = INTERVAL;
+        this.active = false;
     }
 
     String getTitle() {
-        return title;
+        return this.title;
     }
 
-    void setTitle(String title) {
-        this.title = title;
+    void setTitle(final String TITLE) {
+        this.title = TITLE;
     }
 
     boolean isActive() {
-        return true;
+        return this.active;
     }
 
-    void setActive(boolean active) {
-        this.active = active;
+    void setActive(final boolean ACTIVE) {
+        this.active = ACTIVE;
     }
 
     int getTime() {
-        if (interval > 0) {
-            return start;
+        if (this.interval > 0) {
+            return this.start;
         } else {
-            return time;
+            return this.time;
         }
     }
 
-    void setTime(int time) {
-        this.time = time;
+    void setTime(final int TIME) {
+        this.time = TIME;
     }
 
     int getStartTime() {
-        if (interval > 0) {
-            return start;
+        if (this.interval > 0) {
+            return this.start;
         } else {
-            return time;
+            return this.time;
         }
     }
 
     int getEndTime() {
-        if (interval > 0) {
-            return end;
+        if (this.interval > 0) {
+            return this.end;
         } else {
-            return time;
+            return this.time;
         }
     }
 
     int getRepeatInterval() {
-        if (interval >= 0) {
-            return interval;
+        if (this.interval >= 0) {
+            return this.interval;
         } else {
             return 0;
         }
     }
 
-    void setTime(int start, int end, int interval) {
-        this.start = start;
-        this.end = end;
-        this.interval = interval;
+    void setTime(final int START, final int END, final  int INTERVAL) {
+        this.start = START;
+        this.end = END;
+        this.interval = INTERVAL;
     }
+
     boolean isRepeated() {
-        if (interval > 0) {
+        if (this.interval > 0) {
             return true;
         } else {
             return false;
         }
     }
 
-    int nextTimeAfter (int current) {
-        if ( current > getEndTime() ) {
+    int nextTimeAfter (final int CURRENT) {
+        if ( CURRENT > getEndTime() ) {
             return -1;
-        } else if (current > getStartTime() ) {
-            int t = start;
+        } else if (CURRENT > getStartTime() ) {
+            int time = this.start;
             do {
-                t += interval;
+                time += this.interval;
             }
-            while (t < current);
-            return t;
+            while (time < CURRENT);
+            return time;
         } else {
             return getStartTime();
         }
