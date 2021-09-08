@@ -9,17 +9,17 @@ public class Task  {
     int interval;
     boolean active;
 
-     public void Task (final String TITLE, final int TIME) {
-        this.title = TITLE;
-        this.time = TIME;
+     public void Task (final String title, final int time) {
+        this.title = title;
+        this.time = time;
         this.active = false;
     }
 
-    public void Task (final String TITLE, final int START, final int END, final int INTERVAL) {
-        this.title = TITLE;
-        this.start = START;
-        this.end = END;
-        this.interval = INTERVAL;
+    public void Task (final String title, final int start, final int end, final int interval) {
+        this.title = title;
+        this.start = start;
+        this.end = end;
+        this.interval = interval;
         this.active = false;
     }
 
@@ -27,16 +27,16 @@ public class Task  {
         return this.title;
     }
 
-    void setTitle(final String TITLE) {
-        this.title = TITLE;
+    void setTitle(final String title) {
+        this.title = title;
     }
 
     boolean isActive() {
         return this.active;
     }
 
-    void setActive(final boolean ACTIVE) {
-        this.active = ACTIVE;
+    void setActive(final boolean active) {
+        this.active = active;
     }
 
     int getTime() {
@@ -47,8 +47,8 @@ public class Task  {
         }
     }
 
-    void setTime(final int TIME) {
-        this.time = TIME;
+    void setTime(final int time) {
+        this.time = time;
     }
 
     int getStartTime() {
@@ -75,12 +75,11 @@ public class Task  {
         }
     }
 
-    void setTime(final int START, final int END, final  int INTERVAL) {
-        this.start = START;
-        this.end = END;
-        this.interval = INTERVAL;
+    void setTime(final int start, final int end, final  int interval) {
+        this.start = start;
+        this.end = end;
+        this.interval = interval;
     }
-
     boolean isRepeated() {
         if (this.interval > 0) {
             return true;
@@ -89,16 +88,16 @@ public class Task  {
         }
     }
 
-    int nextTimeAfter (final int CURRENT) {
-        if ( CURRENT > getEndTime() ) {
+    int nextTimeAfter (final int current) {
+        if ( current > getEndTime() ) {
             return -1;
-        } else if (CURRENT > getStartTime() ) {
+        } else if (current > getStartTime() ) {
             int time = this.start;
             do {
                 time += this.interval;
             }
-            while (time < CURRENT);
-            return time;
+            while (this.time < current);
+            return this.time;
         } else {
             return getStartTime();
         }
