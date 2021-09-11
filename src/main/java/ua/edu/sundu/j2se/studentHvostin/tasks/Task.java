@@ -10,12 +10,18 @@ public class Task  {
     private boolean active;
 
     public Task (final String title, final int time) {
-        this.title = title;
+        if (time < 0) {
+            throw new IllegalArgumentException("bad percent");
+        }
         this.time = time;
+        this.title = title;
         this.active = false;
     }
 
     public Task (final String title, final int start, final int end, final int interval) {
+        if (start < 0 && end < 0 && interval <= 0) {
+            throw new IllegalArgumentException("bad percent");
+        }
         this.title = title;
         this.start = start;
         this.end = end;
