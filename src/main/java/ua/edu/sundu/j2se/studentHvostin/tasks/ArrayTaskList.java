@@ -18,37 +18,50 @@ package ua.edu.sundu.j2se.studentHvostin.tasks;
 
 public class ArrayTaskList {
 
-    private Task[] tasks = new Task[1];
+    private Task[] tasks = new Task[8];
 
     void add(final Task task) {
-        if (task != null) {
-            this.tasks[this.tasks.length - 1] = task;
-            resize(this.tasks.length + 1);
+        for (int i = 0; i < this.tasks.length - 1; ++i) {
+            if (this.tasks[i] == null) {
+                this.tasks[i] = task;
+                continue;
+            }
         }
+        reSize();
     }
 
     public boolean remove(final Task task) {
-        boolean contains = false;
+        boolean isRemoved = false;
         if (task == null) {
-            return contains;
+            return isRemoved;
         } else {
-            for (int i = 0; i < this.tasks.length; ++i) {
-                if (this.tasks[i] == task) {
-                    contains = true;
-                    this.tasks[i] = this.tasks[this.tasks.length];
-                    resize(this.tasks.length - 1);
+            for (int i = 0; i < this.tasks.length - 1; ++i) {
+                if (this.tasks[i] == task || isRemoved) {
+                    isRemoved = true;
+                    this.tasks[i] = this.tasks[i + 1];
                 }
             }
-            return contains;
+            reSize();
+            return isRemoved;
         }
     }
 
-    private void resize(int capacity) {
-        Task[] copy = new Task[capacity];
-        for (int i = 0; i < this.tasks.length & i < copy.length; i++) {
-            copy[i] = this.tasks[i];
+    private void reSize() {
+        int capacity = 0;
+        for (int i = 0; this.tasks[i] == null || i <  this.tasks.length - 1; ++i) {
+            if (this.tasks.length - i < 2) {
+                capacity = this.tasks.length + 8;
+            } else if (this.tasks.length - i > 16) {
+                capacity = this.tasks.length - 8;
+            }
+            if (capacity > 0) {
+                Task[] copy = new Task[capacity];
+                for (int j = 0; j < this.tasks.length & j < copy.length; j++) {
+                    copy[j] = this.tasks[j];
+                }
+                this.tasks = copy;
+            }
         }
-        this.tasks = copy;
     }
 
     public int size() {
@@ -56,8 +69,8 @@ public class ArrayTaskList {
     }
 
     public Task getTask(final int index) {
-        if (index > this.tasks.length || tasks[index] == null) {
-            return null;
+        if (index >= this.tasks.length - 1 || tasks[index] == null) {
+            throw new IndexOutOfBoundsException("bad percent");
         } else {
             return this.tasks[index];
         }
