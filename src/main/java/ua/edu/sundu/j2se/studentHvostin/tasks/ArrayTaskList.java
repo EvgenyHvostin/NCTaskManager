@@ -17,15 +17,13 @@ package ua.edu.sundu.j2se.studentHvostin.tasks;
  */
 
 public class ArrayTaskList {
-    private final int arrayTaskListSize = 9;
-    private Task[] tasks = new Task[arrayTaskListSize];
+
+    private Task[] tasks = new Task[1];
 
     void add(final Task task) {
-        for (int i = 0; i < this.arrayTaskListSize; ++i) {
-            if (this.tasks[i] == null) {
-                this.tasks[i] = task;
-                break;
-            }
+        if (task != null) {
+            this.tasks[this.tasks.length - 1] = task;
+            resize(this.tasks.length + 1);
         }
     }
 
@@ -37,11 +35,20 @@ public class ArrayTaskList {
             for (int i = 0; i < this.tasks.length; ++i) {
                 if (this.tasks[i] == task) {
                     contains = true;
-                    this.tasks[i] = null;
+                    this.tasks[i] = this.tasks[this.tasks.length];
+                    resize(this.tasks.length - 1);
                 }
             }
             return contains;
         }
+    }
+
+    private void resize(int capacity) {
+        Task[] copy = new Task[capacity];
+        for (int i = 0; i < this.tasks.length & i < copy.length; i++) {
+            copy[i] = this.tasks[i];
+        }
+        this.tasks = copy;
     }
 
     public int size() {
@@ -49,8 +56,8 @@ public class ArrayTaskList {
     }
 
     public Task getTask(final int index) {
-        if (tasks[index] == null) {
-            return new Task("null",0);
+        if (index > this.tasks.length || tasks[index] == null) {
+            return null;
         } else {
             return this.tasks[index];
         }
