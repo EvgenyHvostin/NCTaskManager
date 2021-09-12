@@ -80,11 +80,11 @@ public class ArrayTaskList {
         ArrayTaskList incomTasks = new ArrayTaskList();
 
         for (int index = 0; index <= this.tasks.length - 1; index++) {
-            if (tasks[index] == null) {
+            if (this.tasks[index] == null) {
                 break;
             } else {
-                if (from <= tasks[index].getEndTime() && tasks[index].getTime() <= to) {
-                    incomTasks.add(tasks[index]);
+                if (from <= this.tasks[index].getEndTime() && this.tasks[index].getTime() <= to) {
+                    incomTasks.add(this.tasks[index]);
                 }
             }
         }
