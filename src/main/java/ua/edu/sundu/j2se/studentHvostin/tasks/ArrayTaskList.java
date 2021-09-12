@@ -21,10 +21,10 @@ public class ArrayTaskList {
     private Task[] tasks = new Task[8];
 
     void add(final Task task) {
-        for (int i = 0; i < this.tasks.length - 1; ++i) {
+        for (int i = 0; i < this.tasks.length; ++i) {
             if (this.tasks[i] == null) {
                 this.tasks[i] = task;
-                continue;
+                break;
             }
         }
         reSize();
@@ -48,7 +48,7 @@ public class ArrayTaskList {
 
     private void reSize() {
         int capacity = 0;
-        for (int i = 0; this.tasks[i] == null || i <  this.tasks.length - 1; ++i) {
+        for (int i = 0; this.tasks[i] == null || i <= this.tasks.length - 1; ++i) {
             if (this.tasks.length - i < 2) {
                 capacity = this.tasks.length + 8;
             } else if (this.tasks.length - i > 16) {
@@ -56,7 +56,7 @@ public class ArrayTaskList {
             }
             if (capacity > 0) {
                 Task[] copy = new Task[capacity];
-                for (int j = 0; j < this.tasks.length & j < copy.length; j++) {
+                for (int j = 0; j <= this.tasks.length - 1 && j <= copy.length - 1; j++) {
                     copy[j] = this.tasks[j];
                 }
                 this.tasks = copy;
@@ -69,7 +69,7 @@ public class ArrayTaskList {
     }
 
     public Task getTask(final int index) {
-        if (index >= this.tasks.length - 1 || tasks[index] == null) {
+        if (index >= this.tasks.length || tasks[index] == null) {
             throw new IndexOutOfBoundsException("bad percent");
         } else {
             return this.tasks[index];
@@ -79,7 +79,7 @@ public class ArrayTaskList {
     ArrayTaskList incoming(final int from, final int to) {
         ArrayTaskList incomTasks = new ArrayTaskList();
 
-        for (int index = 0; index < this.tasks.length; index++) {
+        for (int index = 0; index <= this.tasks.length - 1; index++) {
             if (tasks[index] == null) {
                 break;
             } else {
