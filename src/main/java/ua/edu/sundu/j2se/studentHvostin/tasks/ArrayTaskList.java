@@ -83,8 +83,7 @@ public class ArrayTaskList {
             if (tasks[index] == null) {
                 break;
             } else {
-                int time = tasks[index].getTime();
-                if (from >= time & time <= to) {
+                if (from >= tasks[index].getEndTime() && tasks[index].getTime() <= to) {
                     incomTasks.add(tasks[index]);
                 }
             }
