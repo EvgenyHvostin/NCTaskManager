@@ -65,12 +65,16 @@ public class ArrayTaskList {
     }
 
     public int size() {
-        return this.tasks.length;
+        int i = 0;
+        while (this.tasks[i] == null || i == this.tasks.length - 1) {
+            i++;
+        }
+        return i;
     }
 
     public Task getTask(final int index) {
         if (index >= this.tasks.length || tasks[index] == null) {
-            throw new IndexOutOfBoundsException("bad percent");
+            throw new IndexOutOfBoundsException("bad");
         } else {
             return this.tasks[index];
         }

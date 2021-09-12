@@ -10,17 +10,27 @@ public class Task  {
     private boolean active;
 
     public Task (final String title, final int time) {
-        this.title = title;
-        this.time = time;
-        this.active = false;
+        if (time < 0) {
+            throw new IllegalArgumentException("bad");
+        } else {
+            this.title = title;
+            this.time = time;
+            this.active = false;
+        }
+
     }
 
     public Task (final String title, final int start, final int end, final int interval) {
-        this.title = title;
-        this.start = start;
-        this.end = end;
-        this.interval = interval;
-        this.active = false;
+        if (this.start < 0 || this.end < 0 || this.interval <= 0) {
+            throw new IllegalArgumentException("bad");
+        } else {
+            this.title = title;
+            this.start = start;
+            this.end = end;
+            this.interval = interval;
+            this.active = false;
+        }
+
     }
 
     String getTitle() {
