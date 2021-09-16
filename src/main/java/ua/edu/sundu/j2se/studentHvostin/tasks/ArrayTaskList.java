@@ -23,8 +23,6 @@ public class ArrayTaskList {
     public void add(final Task task) {
         if (task == null) {
             throw new IllegalArgumentException("Impossible to add an empty task");
-        } else if (task.getRepeatInterval() <= 0) {
-            throw new IllegalArgumentException("Task repetition interval must be greater than zero");
         }
         for (int i = 0; i < this.tasks.length; ++i) {
             if (this.tasks[i] == null) {
