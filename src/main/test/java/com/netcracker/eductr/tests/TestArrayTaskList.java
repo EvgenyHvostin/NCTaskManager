@@ -48,7 +48,10 @@ public class TestArrayTaskList {
 
     @Test
     public void remove() {
+<<<<<<< Updated upstream:test/java/com/netcracker/eductr/tests/TestArrayTaskList.java
 
+=======
+>>>>>>> Stashed changes:src/main/test/java/com/netcracker/eductr/tests/TestArrayTaskList.java
         ArrayTaskList arr = new ArrayTaskList();
 
         Task task0 = new Task("task", 0);
@@ -63,7 +66,10 @@ public class TestArrayTaskList {
 
         Assertions.assertEquals(arr.size(), 3);
         Assertions.assertEquals(arr.getTask(1), task1);
+<<<<<<< Updated upstream:test/java/com/netcracker/eductr/tests/TestArrayTaskList.java
 
+=======
+>>>>>>> Stashed changes:src/main/test/java/com/netcracker/eductr/tests/TestArrayTaskList.java
     }
 
     @Test
