@@ -2,104 +2,129 @@ package ua.edu.sundu.j2se.studentHvostin.tasks;
 
 public class LinkedList {
 
-    private Task task;
-    private LinkedList nextTask;
-    private int index = 0;
+    private static class Node<E> {
+        private Task task;
+        private Node<Task> next;
 
-    private LinkedList getNextTask() {
-        return nextTask;
-    }
-
-    public int getIndex() {
-        return this.index;
-    }
-
-    public int size() {
-        if (this.task != null) {
-            return this.nextTask.size() + 1;
-        } else {
-            return 0;
+        Node(Task element) {
+            this.task = element;
+            this.next = null;
         }
-    }
 
-    public void setNextTask(LinkedList nextTask) {
-        this.nextTask = nextTask;
-    }
+        public void setTask(Task task) {
+            this.task = task;
+        }
 
-    public void setIndex(int index) {
-        this.index = index;
-    }
-
-    public Task getTask(final int index) {
-        if (index < 0) {
-            throw new IndexOutOfBoundsException(String.format("The Task with index %s doesn't exist", index));
-        } else if (index == this.index) {
+        public Task getTask() {
             return this.task;
-        } else if (this.task == null) {
-            return null;
-        } else {
-            return this.nextTask.getTask(index);
+        }
+
+        public void setNext(Node next) {
+            this.next = next;
+        }
+
+        public Node getNext() {
+            return this.next;
         }
     }
 
-    public Task getTask() {
-        return this.task;
+    private Node head;
+    private int size;
+
+    public LinkedList() {
+        this.head = null;
+        this.size = 0;
+    }
+
+    public int getSize() {
+        return this.size;
     }
 
     public void add(final Task task) {
         if (task == null) {
             throw new IllegalArgumentException("Impossible to add an empty task");
         }
+        Node current = this.head;
 
-        if (this.task == null) {
-            this.task = task;
-            this.nextTask = new LinkedList();
-        } else {
-            this.nextTask.add(task);
-            this.nextTask.setIndex(this.index + 1);
+        if (current == null) {
+            this.head = new Node(task);
+            this.size++;
         }
+        while (current.getNext() != null) {
+            current = current.getNext();
+        }
+        current.setNext(new Node(task));
+        this.size++;
     }
 
     public boolean remove(final Task task) {
+
         boolean isRemoved = false;
 
-        if (this.task == task) {
-            this.task = this.nextTask.getTask();
-            this.nextTask = this.nextTask.getNextTask();
-            this.nextTask.reIndex(1);
-            isRemoved = true;
-        } else if (this.nextTask.getTask() == null) {
-            return isRemoved;
-        } else if (this.nextTask.getTask() == task) {
-            this.setNextTask(this.nextTask.getNextTask());
-            this.nextTask.reIndex(this.index + 1);
-            isRemoved = true;
+        if (head.getTask() == task) {
+            if (this.size < 2) {
+                this.head.setTask(task);
+                this.size++;
+                isRemoved = true;
+            } else {
+                this.head.setTask(task);
+                this.head = this.head.getNext();
+                this.size++;
+                isRemoved = true;
+            }
         } else {
-            isRemoved = this.nextTask.remove(task);
-        }
 
+            Node previous = null;
+            Node current = this.head;
+
+            while (current != null) {
+                if (current.getTask() == task) {
+                    if (previous == null) {
+                        this.head = current.getNext();
+                    } else {
+                        previous.setNext(current.getNext());
+                    }
+                    --this.size;
+                    isRemoved = true;
+                }
+                previous = current;
+                current = current.getNext();
+            }
+        }
         return isRemoved;
     }
 
-    private void reIndex (int index) {
-        if (this.task != null) {
-            this.nextTask.reIndex(this.index);
+    public Task getTask(int index) {
+        if (index < 0 || index > this.size) {
+            throw new IndexOutOfBoundsException(String.format("The Task with index %s doesn't exist", index));
+        } else {
+            Node current = this.head;
+
+            while (index != 0 || current != null) {
+                --index;
+                current = current.getNext();
+            }
+
+            return current.getTask();
         }
-        this.setIndex(index);
     }
 
     public LinkedList incoming(final int from, final int to) {
-        LinkedList incomTasks = new LinkedList();
-
-        if (this.task == null) {
-            return incomTasks;
-        } else {
-            incomTasks = this.nextTask.incoming(from, to);
-            if (from <= this.task.getEndTime() && this.task.getTime() <= to) {
-                incomTasks.add(this.task);
-            }
+        if (from < 0) {
+            throw new IndexOutOfBoundsException(String.format("The Task with index %s doesn't exist", from));
+        } else if (to < 0) {
+            throw new IndexOutOfBoundsException(String.format("The Task with index %s doesn't exist", to));
         }
 
+        LinkedList incomTasks = new LinkedList();
+        Node current = this.head;
+
+        while (current != null) {
+            if (from <= current.getTask().getEndTime() && current.getTask().getTime() <= to) {
+                incomTasks.add(current.getTask());
+            }
+            current = current.getNext();
+        }
         return incomTasks;
     }
 }
