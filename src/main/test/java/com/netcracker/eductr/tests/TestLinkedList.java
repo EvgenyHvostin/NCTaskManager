@@ -14,11 +14,11 @@ public class TestLinkedList {
         link.add(new Task("task1", 20, 50, 10));
         link.add(new Task("task2", 30, 60, 20));
 
-        //Assertions.assertEquals(link.getTask(0).getTitle(), "task0");
-        //Assertions.assertEquals(link.getTask(1).getTitle(), "task1");
-        //Assertions.assertEquals(link.getTask(2).getTitle(), "task2");
+        Assertions.assertEquals(link.getTask(0).getTitle(), "task0");
+        Assertions.assertEquals(link.getTask(1).getTitle(), "task1");
+        Assertions.assertEquals(link.getTask(2).getTitle(), "task2");
     }
-/*
+
     @Test
     public void size() {
         LinkedList link = new LinkedList();
@@ -27,7 +27,7 @@ public class TestLinkedList {
         link.add(new Task("2", 2));
         link.add(new Task("3", 3));
 
-        Assertions.assertEquals(link.size(), 3);
+        Assertions.assertEquals(link.getSize(), 3);
     }
 
     @Test
@@ -55,7 +55,7 @@ public class TestLinkedList {
 
         link.remove(remTask);
 
-        Assertions.assertEquals(link.size(), 2);
+        Assertions.assertEquals(link.getSize(), 2);
         Assertions.assertEquals(link.getTask(0).getTitle(), "task0");
         Assertions.assertEquals(link.getTask(1).getTitle(), "task2");
 
@@ -72,14 +72,10 @@ public class TestLinkedList {
         testArray.add(incomTask0);
         testArray.add(incomTask1);
 
-        incomTasks = testArray;
-
         testArray.add(new Task("task", 40));
         testArray.add(new Task("task", 30));
         
-        Assertions.assertEquals(testArray.incoming(49,60).getTask(0), incomTask1);
+        Assertions.assertEquals(testArray.incoming(49,60).getTask(0), incomTask0);
+        Assertions.assertEquals(testArray.incoming(49,60).getTask(1), incomTask1);
     }
-
- */
-
 }

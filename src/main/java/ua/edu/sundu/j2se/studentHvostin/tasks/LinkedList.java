@@ -2,16 +2,16 @@ package ua.edu.sundu.j2se.studentHvostin.tasks;
 
 public class LinkedList {
 
-    private static class Node<E> {
+    private static class Node {
         private Task task;
-        private Node<Task> next;
+        private Node next;
 
-        Node(Task element) {
+        Node(final Task element) {
             this.task = element;
             this.next = null;
         }
 
-        public void setTask(Task task) {
+        public void setTask(final Task task) {
             this.task = task;
         }
 
@@ -19,7 +19,7 @@ public class LinkedList {
             return this.task;
         }
 
-        public void setNext(Node next) {
+        public void setNext(final Node next) {
             this.next = next;
         }
 
@@ -48,32 +48,34 @@ public class LinkedList {
 
         if (current == null) {
             this.head = new Node(task);
-            this.size++;
+        } else {
+            while (current.getNext() != null) {
+                current = current.getNext();
+            }
+            current.setNext(new Node(task));
         }
-        while (current.getNext() != null) {
-            current = current.getNext();
-        }
-        current.setNext(new Node(task));
         this.size++;
+
     }
 
     public boolean remove(final Task task) {
-
+        if (task == null) {
+            throw new IllegalArgumentException("Impossible to remove an empty task");
+        } else if (size == 0) {
+            return false;
+        }
         boolean isRemoved = false;
 
         if (head.getTask() == task) {
-            if (this.size < 2) {
-                this.head.setTask(task);
-                this.size++;
-                isRemoved = true;
+            if (this.size == 1) {
+                this.head.setTask(null);
+                this.size = 0;
             } else {
-                this.head.setTask(task);
                 this.head = this.head.getNext();
-                this.size++;
-                isRemoved = true;
+                this.size--;
             }
+            isRemoved = true;
         } else {
-
             Node previous = null;
             Node current = this.head;
 
@@ -100,7 +102,8 @@ public class LinkedList {
         } else {
             Node current = this.head;
 
-            while (index != 0 || current != null) {
+            while (index != 0) {
+
                 --index;
                 current = current.getNext();
             }
@@ -111,9 +114,9 @@ public class LinkedList {
 
     public LinkedList incoming(final int from, final int to) {
         if (from < 0) {
-            throw new IndexOutOfBoundsException(String.format("The Task with index %s doesn't exist", from));
+            throw new IndexOutOfBoundsException(String.format("start time %s doesn't is invalid", from));
         } else if (to < 0) {
-            throw new IndexOutOfBoundsException(String.format("The Task with index %s doesn't exist", to));
+            throw new IndexOutOfBoundsException(String.format("end time %s doesn't is invalid", to));
         }
 
         LinkedList incomTasks = new LinkedList();

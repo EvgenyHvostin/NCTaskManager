@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--suppress ALL -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -7,6 +8,14 @@
     <groupId>ZhvostinNCTaskManager</groupId>
     <artifactId>NCTaskManager</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <dependencies>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.8.0</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -39,16 +48,35 @@
     </pluginRepositories>
 
     <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.21.0</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.junit.platform</groupId>
+                        <artifactId>junit-platform-surefire-provider</artifactId>
+                        <version>1.2.0-M1</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.junit.jupiter</groupId>
+                        <artifactId>junit-jupiter-engine</artifactId>
+                        <version>5.2.0-M1</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
         <sourceDirectory>src\main\java</sourceDirectory>
-        <testSourceDirectory>src\main\test\java</testSourceDirectory>
+        <testSourceDirectory>src\test\java</testSourceDirectory>
         <outputDirectory>target\classes</outputDirectory>
         <testOutputDirectory>target\test-classes</testOutputDirectory>
 
-        <resources>
-            <resource>
-                <directory>src\main\resources</directory>
-            </resource>
-        </resources>
+        <!--        <resources>-->
+        <!--            <resource>-->
+        <!--                <directory>src\main\resources</directory>-->
+        <!--            </resource>-->
+        <!--        </resources>-->
 
         <finalName>NCTaskManager-1.0-SNAPSHOT</finalName>
 
@@ -73,7 +101,7 @@
             </plugins>
         </pluginManagement>
     </build>
-    <reporting>
-        <outputDirectory>C:\ProGs\NCTaskManager\target\site</outputDirectory>
-    </reporting>
+    <!--    <reporting>-->
+    <!--        <outputDirectory>C:\ProGs\NCTaskManager\target\site</outputDirectory>-->
+    <!--    </reporting>-->
 </project>
