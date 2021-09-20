@@ -47,17 +47,19 @@ public class TestLinkedList {
     public void remove() {
         LinkedList link = new LinkedList();
 
-        Task remTask = new Task("task1", 20, 50, 10);
+        Task remTask = new Task("remTask", 20, 50, 10);
 
         link.add(new Task("task0", 10, 40, 5));
         link.add(remTask);
         link.add(new Task("task2", 30, 60, 20));
+        link.add(remTask);
 
         link.remove(remTask);
 
-        Assertions.assertEquals(link.getSize(), 2);
+        Assertions.assertEquals(link.getSize(), 3);
         Assertions.assertEquals(link.getTask(0).getTitle(), "task0");
         Assertions.assertEquals(link.getTask(1).getTitle(), "task2");
+        Assertions.assertEquals(link.getTask(2).getTitle(), "remTask");
 
     }
 

@@ -71,13 +71,6 @@
         <testSourceDirectory>src\test\java</testSourceDirectory>
         <outputDirectory>target\classes</outputDirectory>
         <testOutputDirectory>target\test-classes</testOutputDirectory>
-
-        <!--        <resources>-->
-        <!--            <resource>-->
-        <!--                <directory>src\main\resources</directory>-->
-        <!--            </resource>-->
-        <!--        </resources>-->
-
         <finalName>NCTaskManager-1.0-SNAPSHOT</finalName>
 
         <pluginManagement>
@@ -101,7 +94,4 @@
             </plugins>
         </pluginManagement>
     </build>
-    <!--    <reporting>-->
-    <!--        <outputDirectory>C:\ProGs\NCTaskManager\target\site</outputDirectory>-->
-    <!--    </reporting>-->
 </project>

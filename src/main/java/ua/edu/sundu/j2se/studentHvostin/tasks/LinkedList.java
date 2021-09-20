@@ -83,11 +83,13 @@ public class LinkedList {
                 if (current.getTask() == task) {
                     if (previous == null) {
                         this.head = current.getNext();
+                        --this.size;
                     } else {
                         previous.setNext(current.getNext());
                     }
                     --this.size;
                     isRemoved = true;
+                    break;
                 }
                 previous = current;
                 current = current.getNext();
@@ -103,7 +105,6 @@ public class LinkedList {
             Node current = this.head;
 
             while (index != 0) {
-
                 --index;
                 current = current.getNext();
             }
