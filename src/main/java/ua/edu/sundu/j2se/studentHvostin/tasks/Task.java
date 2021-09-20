@@ -10,36 +10,48 @@ public class Task  {
     private boolean active;
 
     public Task (final String title, final int time) {
-        this.title = title;
-        this.time = time;
-        this.active = false;
+        if (time < 0) {
+            throw new IllegalArgumentException("Time cannot be negative");
+        } else {
+            this.title = title;
+            this.time = time;
+            this.active = false;
+        }
+
     }
 
     public Task (final String title, final int start, final int end, final int interval) {
-        this.title = title;
-        this.start = start;
-        this.end = end;
-        this.interval = interval;
-        this.active = false;
+        if (start < 0 || end < 0 ) {
+            throw new IllegalArgumentException("Time cannot be negative");
+        } else if (interval <= 0) {
+            throw new IllegalArgumentException("Interval cannot be negative");
+        } else {
+            this.title = title;
+            this.start = start;
+            this.end = end;
+            this.interval = interval;
+            this.active = false;
+        }
+
     }
 
-    String getTitle() {
+    public String getTitle() {
         return this.title;
     }
 
-    void setTitle(final String title) {
+    public void setTitle(final String title) {
         this.title = title;
     }
 
-    boolean isActive() {
+    public boolean isActive() {
         return this.active;
     }
 
-    void setActive(final boolean active) {
+    public void setActive(final boolean active) {
         this.active = active;
     }
 
-    int getTime() {
+    public int getTime() {
         if (this.interval > 0) {
             return this.start;
         } else {
@@ -47,12 +59,16 @@ public class Task  {
         }
     }
 
-    void setTime(final int time) {
-        this.time = time;
-        this.interval = 0;
+    public void setTime(final int time) {
+        if (time < 0) {
+            throw new IllegalArgumentException("Time cannot be negative");
+        } else {
+            this.time = time;
+            this.interval = 0;
+        }
     }
 
-    int getStartTime() {
+    public int getStartTime() {
         if (this.interval > 0) {
             return this.start;
         } else {
@@ -60,7 +76,7 @@ public class Task  {
         }
     }
 
-    int getEndTime() {
+    public int getEndTime() {
         if (this.interval > 0) {
             return this.end;
         } else {
@@ -68,7 +84,7 @@ public class Task  {
         }
     }
 
-    int getRepeatInterval() {
+    public int getRepeatInterval() {
         if (this.interval >= 0) {
             return this.interval;
         } else {
@@ -76,13 +92,19 @@ public class Task  {
         }
     }
 
-    void setTime(final int start, final int end, final  int interval) {
-        this.start = start;
-        this.end = end;
-        this.interval = interval;
+    public void setTime(final int start, final int end, final  int interval) {
+        if (start < 0 || end < 0 ) {
+            throw new IllegalArgumentException("Time cannot be negative");
+        } else if (interval <= 0) {
+            throw new IllegalArgumentException("Interval cannot be negative");
+        } else {
+            this.start = start;
+            this.end = end;
+            this.interval = interval;
+        }
     }
 
-    boolean isRepeated() {
+    public boolean isRepeated() {
         if (this.interval > 0) {
             return true;
         } else {
@@ -90,10 +112,10 @@ public class Task  {
         }
     }
 
-    int nextTimeAfter (final int current) {
-        if ( current > getEndTime() ) {
+    public int nextTimeAfter (final int current) {
+        if ( current > this.getEndTime() ) {
             return -1;
-        } else if (current > getStartTime() ) {
+        } else if (current > this.getStartTime() ) {
             int time = this.start;
             do {
                 time += this.interval;
@@ -101,7 +123,7 @@ public class Task  {
             while (time < current);
             return time;
         } else {
-            return getStartTime();
+            return this.getStartTime();
         }
     }
 
