@@ -44,6 +44,17 @@ public class TestLinkedList {
     }
 
     @Test
+    public void removeFirst() {
+        LinkedList link = new LinkedList();
+
+        Task remTask = new Task("remTask", 20, 50, 10);
+
+        link.add(remTask);
+        link.remove(remTask);
+        Assertions.assertEquals(link.getSize(), 0);
+    }
+
+    @Test
     public void remove() {
         LinkedList link = new LinkedList();
 

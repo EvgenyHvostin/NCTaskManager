@@ -6,24 +6,24 @@ public class LinkedList {
         private Task task;
         private Node next;
 
-        Node(final Task element) {
+        private Node(final Task element) {
             this.task = element;
             this.next = null;
         }
 
-        public void setTask(final Task task) {
+        private void setTask(final Task task) {
             this.task = task;
         }
 
-        public Task getTask() {
+        private Task getTask() {
             return this.task;
         }
 
-        public void setNext(final Node next) {
+        private void setNext(final Node next) {
             this.next = next;
         }
 
-        public Node getNext() {
+        private Node getNext() {
             return this.next;
         }
     }
@@ -65,35 +65,22 @@ public class LinkedList {
             return false;
         }
         boolean isRemoved = false;
+        Node previous = null;
+        Node current = this.head;
 
-        if (head.getTask() == task) {
-            if (this.size == 1) {
-                this.head.setTask(null);
-                this.size = 0;
-            } else {
-                this.head = this.head.getNext();
-                this.size--;
-            }
-            isRemoved = true;
-        } else {
-            Node previous = null;
-            Node current = this.head;
-
-            while (current != null) {
-                if (current.getTask() == task) {
-                    if (previous == null) {
-                        this.head = current.getNext();
-                        --this.size;
-                    } else {
-                        previous.setNext(current.getNext());
-                    }
-                    --this.size;
-                    isRemoved = true;
-                    break;
+        while (current != null) {
+            if (current.getTask() == task) {
+                if (previous == null) {
+                    this.head = current.getNext();
+                } else {
+                    previous.setNext(current.getNext());
                 }
-                previous = current;
-                current = current.getNext();
+                --this.size;
+                isRemoved = true;
+                break;
             }
+            previous = current;
+            current = current.getNext();
         }
         return isRemoved;
     }
