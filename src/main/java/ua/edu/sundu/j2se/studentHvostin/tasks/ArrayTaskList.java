@@ -16,7 +16,7 @@ package ua.edu.sundu.j2se.studentHvostin.tasks;
  * хотя бы один раз после the "from" время, и не позднее "to" time.
  */
 
-public class ArrayTaskList {
+public class ArrayTaskList extends AbstractTaskList {
 
     private Task[] tasks = new Task[8];
 
@@ -51,7 +51,7 @@ public class ArrayTaskList {
 
     private void reSize() {
         int capacity = 0;
-        int size = this.size();
+        int size = this.getSize();
 
         if (this.tasks.length - size < 2) {
             capacity = this.tasks.length + 8;
@@ -68,7 +68,7 @@ public class ArrayTaskList {
         }
     }
 
-    public int size() {
+    public int getSize() {
         int i = 0;
         while (this.tasks[i] != null || i == this.tasks.length - 1) {
             i++;
@@ -87,7 +87,7 @@ public class ArrayTaskList {
     public ArrayTaskList incoming(final int from, final int to) {
         ArrayTaskList incomTasks = new ArrayTaskList();
 
-        for (int index = 0; index <= this.size(); index++) {
+        for (int index = 0; index <= this.getSize(); index++) {
             if (this.tasks[index] == null) {
                 break;
             } else {

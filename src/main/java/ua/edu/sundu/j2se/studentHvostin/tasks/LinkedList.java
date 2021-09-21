@@ -1,6 +1,6 @@
 package ua.edu.sundu.j2se.studentHvostin.tasks;
 
-public class LinkedList {
+public class LinkedList extends AbstractTaskList {
 
     private static class Node {
         private Task task;
