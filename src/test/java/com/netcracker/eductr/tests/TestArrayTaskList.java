@@ -39,11 +39,11 @@ public class TestArrayTaskList {
         arr.add(task);
         arr.add(task);
 
-        Assertions.assertEquals(arr.size(), 2);
+        Assertions.assertEquals(arr.getSize(), 2);
 
         arr.add(task);
 
-        Assertions.assertEquals(arr.size(), 3);
+        Assertions.assertEquals(arr.getSize(), 3);
     }
 
     @Test
@@ -61,7 +61,7 @@ public class TestArrayTaskList {
 
         arr.remove(task0);
 
-        Assertions.assertEquals(arr.size(), 3);
+        Assertions.assertEquals(arr.getSize(), 3);
         Assertions.assertEquals(arr.getTask(1), task1);
 
     }
@@ -77,12 +77,9 @@ public class TestArrayTaskList {
         testArray.add(incomTask0);
         testArray.add(incomTask1);
 
-        incomTasks = testArray;
-
         testArray.add(new Task("task", 40));
         testArray.add(new Task("task", 30));
 
         Assertions.assertEquals(testArray.incoming(49,60).getTask(1).getTime(), 40);
-        //Assertions.assertEquals(testArray.incoming(49,60).getTask(0), incomTask1);
     }
 }
