@@ -20,14 +20,17 @@ public class ArrayTaskList {
 
     private Task[] tasks = new Task[8];
 
-    void add(final Task task) {
+    public void add(final Task task) {
+        if (task == null) {
+            throw new IllegalArgumentException("Impossible to add an empty task");
+        }
         for (int i = 0; i < this.tasks.length; ++i) {
             if (this.tasks[i] == null) {
                 this.tasks[i] = task;
                 break;
             }
         }
-        reSize();
+        this.reSize();
     }
 
     public boolean remove(final Task task) {
@@ -41,45 +44,50 @@ public class ArrayTaskList {
                     this.tasks[i] = this.tasks[i + 1];
                 }
             }
-            reSize();
+            this.reSize();
             return isRemoved;
         }
     }
 
     private void reSize() {
         int capacity = 0;
-        for (int i = 0; this.tasks[i] == null || i <= this.tasks.length - 1; ++i) {
-            if (this.tasks.length - i < 2) {
-                capacity = this.tasks.length + 8;
-            } else if (this.tasks.length - i > 16) {
-                capacity = this.tasks.length - 8;
+        int size = this.size();
+
+        if (this.tasks.length - size < 2) {
+            capacity = this.tasks.length + 8;
+        } else if (this.tasks.length - size > 16) {
+            capacity = this.tasks.length - 8;
+        }
+
+        if (capacity > 0) {
+            Task[] copy = new Task[capacity];
+            for (int j = 0; j <= this.tasks.length - 1 && j <= copy.length - 1; j++) {
+                copy[j] = this.tasks[j];
             }
-            if (capacity > 0) {
-                Task[] copy = new Task[capacity];
-                for (int j = 0; j <= this.tasks.length - 1 && j <= copy.length - 1; j++) {
-                    copy[j] = this.tasks[j];
-                }
-                this.tasks = copy;
-            }
+            this.tasks = copy;
         }
     }
 
     public int size() {
-        return this.tasks.length;
+        int i = 0;
+        while (this.tasks[i] != null || i == this.tasks.length - 1) {
+            i++;
+        }
+        return i;
     }
 
     public Task getTask(final int index) {
         if (index >= this.tasks.length || tasks[index] == null) {
-            throw new IndexOutOfBoundsException("bad percent");
+            throw new IndexOutOfBoundsException(String.format("The Task with index %s doesn't exist", index));
         } else {
             return this.tasks[index];
         }
     }
 
-    ArrayTaskList incoming(final int from, final int to) {
+    public ArrayTaskList incoming(final int from, final int to) {
         ArrayTaskList incomTasks = new ArrayTaskList();
 
-        for (int index = 0; index <= this.tasks.length - 1; index++) {
+        for (int index = 0; index <= this.size(); index++) {
             if (this.tasks[index] == null) {
                 break;
             } else {

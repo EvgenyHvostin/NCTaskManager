@@ -21,6 +21,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
+<<<<<<< HEAD
 
     <repositories>
         <repository>
@@ -71,6 +72,7 @@
         <testSourceDirectory>src\test\java</testSourceDirectory>
         <outputDirectory>target\classes</outputDirectory>
         <testOutputDirectory>target\test-classes</testOutputDirectory>
+
         <finalName>NCTaskManager-1.0-SNAPSHOT</finalName>
 
         <pluginManagement>
