@@ -1,4 +1,4 @@
-package ua.edu.sundu.j2se.studentHvostin.tasks;
+package Factory;
 
 public enum ListTypes {
     ARRAY,
