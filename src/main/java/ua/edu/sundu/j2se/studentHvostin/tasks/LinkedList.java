@@ -145,7 +145,7 @@ public class LinkedList extends AbstractTaskList {
             return true;
         if (getClass() != taskList.getClass())
             return false;
-
+        /*
         LinkedList other = (LinkedList) taskList;
         int index = 0;
 
@@ -156,6 +156,25 @@ public class LinkedList extends AbstractTaskList {
             ++index;
         }
         return true;
+         */
+
+        LinkedList other = (LinkedList) taskList;
+
+        while (this.iterator().hasNext()) {
+            if (!this.iterator().next().equals(other.iterator().next())) {
+                return false;
+            }
+        }
+        return true;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("(" + this.getTask(0).toString() + ", ");
+
+        while (this.iterator().hasNext()) {
+            result.append(this.iterator().next().toString()).append(", ");
+        }
+        return result + ")";
+    }
 }

@@ -159,4 +159,17 @@ public class Task  {
         return this.getRepeatInterval() == other.getRepeatInterval();
     }
 
+    @Override
+    public String toString(){
+        if (this.isRepeated()) {
+            return "(title=" + this.getTitle() +
+                    ", startTime=" + this.getStartTime() +
+                    ", endTime=" + this.getEndTime() +
+                    ", repeatInterval=" + this.getRepeatInterval() + ")";
+        } else {
+            return "(title=" + this.getTitle() +
+                    ", time=" + this.getTime() + ")";
+        }
+    }
+
 }

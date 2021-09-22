@@ -122,7 +122,7 @@ public class ArrayTaskList extends AbstractTaskList {
             return true;
         if (getClass() != taskList.getClass())
             return false;
-
+        /*
         ArrayTaskList other = (ArrayTaskList) taskList;
         int index = 0;
 
@@ -133,6 +133,26 @@ public class ArrayTaskList extends AbstractTaskList {
             ++index;
         }
         return true;
+         */
+
+        ArrayTaskList other = (ArrayTaskList) taskList;
+
+        while (this.iterator().hasNext()) {
+            if (!this.iterator().next().equals(other.iterator().next())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        String result = "(" + this.getTask(0).toString() + ", ";
+
+        while (this.iterator().hasNext()) {
+            result += this.iterator().next().toString() + ", ";
+        }
+        return result + ")";
     }
 
 }
