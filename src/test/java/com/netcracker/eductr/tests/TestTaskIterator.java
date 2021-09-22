@@ -21,8 +21,13 @@ public class TestTaskIterator {
         array.add(testTask);
 
         Iterator iter = array.iterator();
-        Assertions.assertEquals(iter.next(), testTask);
-        iter.next();
-        Assertions.assertEquals(iter.next(), testTask);
+        int counter = 0;
+        while (counter < 3) {
+            Assertions.assertEquals(iter.next(), array.getTask(counter));
+            ++counter;
+        }
+//        Assertions.assertEquals(iter.next(), testTask);
+//        iter.next();
+//        Assertions.assertEquals(iter.next(), testTask);
     }
 }

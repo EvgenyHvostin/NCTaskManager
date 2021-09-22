@@ -23,12 +23,10 @@ public class TaskIterator implements Iterator<Task> {
 
     @Override
     public Task next() {
-        //if (this.hasNext()) {throw new IllegalArgumentException("No more elements");}
-        try {
-            return this.taskList.getTask(this.index);
-        } finally {
-            this.index++;
+        if (this.hasNext()) {
+            throw new IllegalArgumentException("No more elements");
         }
+        return this.taskList.getTask(this.index++);
     }
 
     @Override
