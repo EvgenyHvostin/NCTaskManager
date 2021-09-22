@@ -1,4 +1,4 @@
-package Factory;
+package ua.edu.sundu.j2se.studentHvostin.tasks.factory;
 
 import ua.edu.sundu.j2se.studentHvostin.tasks.AbstractTaskList;
 import ua.edu.sundu.j2se.studentHvostin.tasks.ArrayTaskList;

@@ -1,7 +1,7 @@
 package com.netcracker.eductr.tests;
 
-import Factory.ListTypes;
-import Factory.TaskListFactory;
+import ua.edu.sundu.j2se.studentHvostin.tasks.factory.ListTypes;
+import ua.edu.sundu.j2se.studentHvostin.tasks.factory.TaskListFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ua.edu.sundu.j2se.studentHvostin.tasks.AbstractTaskList;
