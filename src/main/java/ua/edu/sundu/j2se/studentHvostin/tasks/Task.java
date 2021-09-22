@@ -147,16 +147,16 @@ public class Task  {
             return true;
         if (getClass() != task.getClass())
             return false;
+
         Task other = (Task) task;
+
         if (!this.getTitle().equals(other.getTitle()))
             return false;
         if (this.getStartTime() != other.getStartTime())
             return false;
         if (this.getEndTime() != other.getEndTime())
             return false;
-        if (this.getRepeatInterval() != other.getRepeatInterval())
-            return false;
-        return true;
+        return this.getRepeatInterval() == other.getRepeatInterval();
     }
 
 }

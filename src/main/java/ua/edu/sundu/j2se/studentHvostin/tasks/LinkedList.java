@@ -118,4 +118,44 @@ public class LinkedList extends AbstractTaskList {
         }
         return incomTasks;
     }
+
+    @Override
+    public int hashCode() {
+        int index = 0;
+        Task task;
+        int result = 1;
+
+        Node current = this.head;
+
+        while (index < this.getSize()) {
+            task = current.getTask();
+            result *= task.getStartTime() + task.getEndTime() + task.getRepeatInterval();
+            current = current.getNext();
+            ++index;
+        }
+
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object taskList) {
+        if (taskList == null)
+            return false;
+        if (this == taskList)
+            return true;
+        if (getClass() != taskList.getClass())
+            return false;
+
+        ArrayTaskList other = (ArrayTaskList) taskList;
+        int index = 0;
+
+        while (index < getSize()) {
+            if (!this.getTask(index).equals(other.getTask(index))) {
+                return false;
+            }
+            ++index;
+        }
+        return true;
+    }
+
 }

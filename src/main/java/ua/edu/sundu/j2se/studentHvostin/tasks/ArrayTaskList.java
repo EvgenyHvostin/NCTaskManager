@@ -99,4 +99,40 @@ public class ArrayTaskList extends AbstractTaskList {
         return incomTasks;
     }
 
+    @Override
+    public int hashCode() {
+        int index = 0;
+        Task task;
+        int result = 1;
+
+        while (index < this.getSize()) {
+            task = this.getTask(index);
+            result *= task.getStartTime() + task.getEndTime() + task.getRepeatInterval();
+            ++index;
+        }
+
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object taskList) {
+        if (taskList == null)
+            return false;
+        if (this == taskList)
+            return true;
+        if (getClass() != taskList.getClass())
+            return false;
+
+        ArrayTaskList other = (ArrayTaskList) taskList;
+        int index = 0;
+
+        while (index < this.getSize()) {
+            if (!this.getTask(index).equals(other.getTask(index))) {
+                return false;
+            }
+            ++index;
+        }
+        return true;
+    }
+
 }
