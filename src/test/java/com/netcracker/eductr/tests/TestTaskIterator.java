@@ -2,6 +2,7 @@ package com.netcracker.eductr.tests;
 
 import Factory.ListTypes;
 import Factory.TaskListFactory;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ua.edu.sundu.j2se.studentHvostin.tasks.AbstractTaskList;
 import ua.edu.sundu.j2se.studentHvostin.tasks.Task;
@@ -16,12 +17,12 @@ public class TestTaskIterator {
         Task testTask = new Task("task", 0, 48, 24);
 
         array.add(testTask);
+        array.add(new Task("task", 1, 48, 24));
         array.add(testTask);
 
         Iterator iter = array.iterator();
-        while(iter.hasNext()){
-
-            System.out.println(iter.next());
-        }
+        Assertions.assertEquals(iter.next(), testTask);
+        iter.next();
+        Assertions.assertEquals(iter.next(), testTask);
     }
 }

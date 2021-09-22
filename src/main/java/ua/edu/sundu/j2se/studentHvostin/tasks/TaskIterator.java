@@ -18,21 +18,14 @@ public class TaskIterator implements Iterator<Task> {
 
     @Override
     public boolean hasNext() {
-        if (this.index < this.size) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.index < this.size;
     }
 
     @Override
     public Task next() {
-        if (this.hasNext()) {
-            throw new IllegalArgumentException("No more elements");
-        }
-
+        //if (this.hasNext()) {throw new IllegalArgumentException("No more elements");}
         try {
-            return this.taskList.getTask(this.index + 1);
+            return this.taskList.getTask(this.index);
         } finally {
             this.index++;
         }
