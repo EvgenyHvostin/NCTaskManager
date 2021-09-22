@@ -146,10 +146,10 @@ public class LinkedList extends AbstractTaskList {
         if (getClass() != taskList.getClass())
             return false;
 
-        ArrayTaskList other = (ArrayTaskList) taskList;
+        LinkedList other = (LinkedList) taskList;
         int index = 0;
 
-        while (index < getSize()) {
+        while (index < this.getSize()) {
             if (!this.getTask(index).equals(other.getTask(index))) {
                 return false;
             }
