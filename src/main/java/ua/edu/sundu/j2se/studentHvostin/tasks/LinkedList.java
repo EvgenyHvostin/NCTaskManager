@@ -15,7 +15,7 @@ public class LinkedList extends AbstractTaskList {
             this.task = task;
         }
 
-        private Task getTask() {
+        public Task getTask() {
             return this.task;
         }
 
