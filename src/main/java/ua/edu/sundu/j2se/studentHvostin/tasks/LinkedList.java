@@ -177,4 +177,5 @@ public class LinkedList extends AbstractTaskList {
         }
         return result + ")";
     }
+
 }

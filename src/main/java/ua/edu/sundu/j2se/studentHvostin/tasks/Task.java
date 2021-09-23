@@ -172,4 +172,8 @@ public class Task  {
         }
     }
 
+    @Override
+    protected Task clone() throws CloneNotSupportedException {
+        return (Task) super.clone();
+    }
 }

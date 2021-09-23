@@ -13,4 +13,9 @@ public abstract class AbstractTaskList implements Iterable<Task> {
     public Iterator<Task> iterator(){
         return new TaskIterator(this);
     }
+
+    @Override
+    protected AbstractTaskList clone() throws CloneNotSupportedException {
+        return (AbstractTaskList) super.clone();
+    }
 }

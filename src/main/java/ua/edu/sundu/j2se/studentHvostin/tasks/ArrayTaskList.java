@@ -133,7 +133,7 @@ public class ArrayTaskList extends AbstractTaskList {
             ++index;
         }
         return true;
-         */
+        */
 
         ArrayTaskList other = (ArrayTaskList) taskList;
 
