@@ -1,5 +1,7 @@
 package ua.edu.sundu.j2se.studentHvostin.tasks;
 
+import java.util.stream.Stream;
+
 public class LinkedList extends AbstractTaskList {
 
     private static class Node {
@@ -99,7 +101,7 @@ public class LinkedList extends AbstractTaskList {
             return current.getTask();
         }
     }
-
+    /*
     public LinkedList incoming(final int from, final int to) {
         if (from < 0) {
             throw new IndexOutOfBoundsException(String.format("start time %s doesn't is invalid", from));
@@ -118,6 +120,7 @@ public class LinkedList extends AbstractTaskList {
         }
         return incomTasks;
     }
+     */
 
     @Override
     public int hashCode() {
@@ -178,4 +181,15 @@ public class LinkedList extends AbstractTaskList {
         return result + ")";
     }
 
+    @Override
+    public Stream<Task> getStream() {
+        Stream.Builder<Task> streamBuiderTask = Stream.<Task>builder();
+        Node current = this.head;
+
+        while (current != null) {
+            streamBuiderTask.accept(current.getTask());
+            current = current.getNext();
+        }
+        return streamBuiderTask.build();
+    }
 }

@@ -1,5 +1,8 @@
 package ua.edu.sundu.j2se.studentHvostin.tasks;
 
+import java.util.Arrays;
+import java.util.stream.Stream;
+
 /**
  * void add (Task task) - это метод, который добавляет указанную задачу в список.
  * boolean remove (Task task) - это метод, который удаляет задачу из списка и возвращает true,
@@ -83,7 +86,7 @@ public class ArrayTaskList extends AbstractTaskList {
             return this.tasks[index];
         }
     }
-
+    /*
     public ArrayTaskList incoming(final int from, final int to) {
         ArrayTaskList incomTasks = new ArrayTaskList();
 
@@ -98,6 +101,7 @@ public class ArrayTaskList extends AbstractTaskList {
         }
         return incomTasks;
     }
+     */
 
     @Override
     public int hashCode() {
@@ -155,4 +159,13 @@ public class ArrayTaskList extends AbstractTaskList {
         return result + ")";
     }
 
+    @Override
+    public Stream<Task> getStream() {
+        Stream.Builder<Task> streamBuiderTask = Stream.<Task>builder();
+
+        for (int index = 0; index < this.getSize() ; ++index) {
+            streamBuiderTask.accept(tasks[index]);
+        }
+        return streamBuiderTask.build();
+    }
 }
