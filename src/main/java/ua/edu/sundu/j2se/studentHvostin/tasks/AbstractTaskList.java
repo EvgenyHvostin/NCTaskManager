@@ -31,7 +31,7 @@ public abstract class AbstractTaskList implements Iterable<Task> {
     }
 
     @Override
-    protected AbstractTaskList clone() throws CloneNotSupportedException {
+    public AbstractTaskList clone() throws CloneNotSupportedException {
         return (AbstractTaskList) super.clone();
     }
 
