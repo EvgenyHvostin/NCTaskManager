@@ -173,6 +173,9 @@ public class LinkedList extends AbstractTaskList {
 
     @Override
     public String toString() {
+        if (this.head == null) {
+            throw new NullPointerException("Linked list empty");
+        }
         StringBuilder result = new StringBuilder("(" + this.getTask(0).toString() + ", ");
 
         while (this.iterator().hasNext()) {

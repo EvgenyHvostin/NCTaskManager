@@ -151,6 +151,9 @@ public class ArrayTaskList extends AbstractTaskList {
 
     @Override
     public String toString() {
+        if (this.getSize() < 0) {
+            throw new NullPointerException("Linked list empty");
+        }
         String result = "(" + this.getTask(0).toString() + ", ";
 
         while (this.iterator().hasNext()) {
