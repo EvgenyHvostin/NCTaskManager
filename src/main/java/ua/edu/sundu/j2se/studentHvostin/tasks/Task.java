@@ -1,6 +1,6 @@
 package ua.edu.sundu.j2se.studentHvostin.tasks;
 
-public class Task  {
+public class Task implements Cloneable {
 
     private String title;
     private int time;
@@ -173,7 +173,18 @@ public class Task  {
     }
 
     @Override
-    protected Task clone() throws CloneNotSupportedException {
-        return (Task) super.clone();
+    public Task clone() {
+        Task newTask = new Task(null, 0);
+        if (this.isRepeated()) {
+            newTask.setTitle(this.getTitle());
+            newTask.setTime(
+                    this.getStartTime(),
+                    this.getEndTime(),
+                    this.getRepeatInterval());
+        } else {
+            newTask.setTitle(this.getTitle());
+            newTask.setTime(this.getTime());
+        }
+        return newTask;
     }
 }

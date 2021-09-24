@@ -170,6 +170,9 @@ public class LinkedList extends AbstractTaskList {
 
     @Override
     public String toString() {
+        if (this.head == null) {
+            throw new NullPointerException("Linked list empty");
+        }
         StringBuilder result = new StringBuilder("(" + this.getTask(0).toString() + ", ");
 
         while (this.iterator().hasNext()) {
@@ -178,4 +181,13 @@ public class LinkedList extends AbstractTaskList {
         return result + ")";
     }
 
+    @Override
+    public LinkedList clone() {
+        LinkedList newTaskList = new LinkedList();
+
+        while (this.iterator().hasNext()) {
+            newTaskList.add(this.iterator().next().clone());
+        }
+        return newTaskList;
+    }
 }
