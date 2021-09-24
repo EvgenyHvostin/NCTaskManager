@@ -161,15 +161,17 @@ public class Task implements Cloneable {
 
     @Override
     public String toString(){
+        String result = "(";
         if (this.isRepeated()) {
-            return "(title=" + this.getTitle() +
+            result += "title=" + this.getTitle() +
                     ", startTime=" + this.getStartTime() +
                     ", endTime=" + this.getEndTime() +
-                    ", repeatInterval=" + this.getRepeatInterval() + ")";
+                    ", repeatInterval=" + this.getRepeatInterval();
         } else {
-            return "(title=" + this.getTitle() +
-                    ", time=" + this.getTime() + ")";
+            result += "title=" + this.getTitle() +
+                    ", time=" + this.getTime();
         }
+        return result + ")";
     }
 
     @Override
