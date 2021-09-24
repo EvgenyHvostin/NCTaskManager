@@ -1,6 +1,7 @@
 package ua.edu.sundu.j2se.studentHvostin.tasks;
 
 import java.util.Iterator;
+import java.util.stream.Stream;
 
 /**
  * void add (Task task) - это метод, который добавляет указанную задачу в список.
@@ -85,7 +86,7 @@ public class ArrayTaskList extends AbstractTaskList {
             return this.tasks[index];
         }
     }
-
+    /*
     public ArrayTaskList incoming(final int from, final int to) {
         ArrayTaskList incomTasks = new ArrayTaskList();
 
@@ -100,6 +101,7 @@ public class ArrayTaskList extends AbstractTaskList {
         }
         return incomTasks;
     }
+     */
 
     @Override
     public int hashCode() {
@@ -163,10 +165,20 @@ public class ArrayTaskList extends AbstractTaskList {
     @Override
     public ArrayTaskList clone() {
         ArrayTaskList newTaskList = new ArrayTaskList();
+        Iterator<Task> iter = this.iterator();
 
-        while (this.iterator().hasNext()) {
-            newTaskList.add(this.iterator().next().clone());
+        while (iter.hasNext()) {
+            newTaskList.add(iter.next().clone());
         }
         return newTaskList;
+    }
+
+    public Stream<Task> getStream() {
+        Stream.Builder<Task> streamBuiderTask = Stream.<Task>builder();
+
+        for (int index = 0; index < this.getSize() ; ++index) {
+            streamBuiderTask.accept(tasks[index]);
+        }
+        return streamBuiderTask.build();
     }
 }
