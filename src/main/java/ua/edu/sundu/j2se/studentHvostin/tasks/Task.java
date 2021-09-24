@@ -1,6 +1,6 @@
 package ua.edu.sundu.j2se.studentHvostin.tasks;
 
-public class Task  {
+public class Task implements Cloneable {
 
     private String title;
     private int time;
@@ -127,4 +127,66 @@ public class Task  {
         }
     }
 
+    @Override
+    public int hashCode() {
+        int active = 0;
+        if (this.active) {
+            active = 1;
+        }
+
+        int result = this.getStartTime() * this.getEndTime() + getRepeatInterval() + active;
+
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object task) {
+        if (task == null)
+            return false;
+        if (this == task)
+            return true;
+        if (getClass() != task.getClass())
+            return false;
+
+        Task other = (Task) task;
+
+        if (!this.getTitle().equals(other.getTitle()))
+            return false;
+        if (this.getStartTime() != other.getStartTime())
+            return false;
+        if (this.getEndTime() != other.getEndTime())
+            return false;
+        return this.getRepeatInterval() == other.getRepeatInterval();
+    }
+
+    @Override
+    public String toString(){
+        String result = "(";
+        if (this.isRepeated()) {
+            result += "title=" + this.getTitle() +
+                    ", startTime=" + this.getStartTime() +
+                    ", endTime=" + this.getEndTime() +
+                    ", repeatInterval=" + this.getRepeatInterval();
+        } else {
+            result += "title=" + this.getTitle() +
+                    ", time=" + this.getTime();
+        }
+        return result + ")";
+    }
+
+    @Override
+    public Task clone() {
+        Task newTask = new Task(null, 0);
+        if (this.isRepeated()) {
+            newTask.setTitle(this.getTitle());
+            newTask.setTime(
+                    this.getStartTime(),
+                    this.getEndTime(),
+                    this.getRepeatInterval());
+        } else {
+            newTask.setTitle(this.getTitle());
+            newTask.setTime(this.getTime());
+        }
+        return newTask;
+    }
 }

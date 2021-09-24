@@ -1,5 +1,7 @@
 package ua.edu.sundu.j2se.studentHvostin.tasks;
 
+import java.util.Iterator;
+
 public class LinkedList extends AbstractTaskList {
 
     private static class Node {
@@ -117,5 +119,77 @@ public class LinkedList extends AbstractTaskList {
             current = current.getNext();
         }
         return incomTasks;
+    }
+
+    @Override
+    public int hashCode() {
+        int index = 0;
+        Task task;
+        int result = 1;
+
+        Node current = this.head;
+
+        while (index < this.getSize()) {
+            task = current.getTask();
+            result *= task.getStartTime() + task.getEndTime() + task.getRepeatInterval();
+            current = current.getNext();
+            ++index;
+        }
+
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object taskList) {
+        if (taskList == null)
+            return false;
+        if (this == taskList)
+            return true;
+        if (getClass() != taskList.getClass())
+            return false;
+        /*
+        LinkedList other = (LinkedList) taskList;
+        int index = 0;
+
+        while (index < this.getSize()) {
+            if (!this.getTask(index).equals(other.getTask(index))) {
+                return false;
+            }
+            ++index;
+        }
+        return true;
+         */
+
+        LinkedList other = (LinkedList ) taskList;
+        Iterator<Task> otherIter = other.iterator();
+        Iterator<Task> iter = this.iterator();
+
+        while (iter.hasNext()) {
+            if (!iter.next().equals(otherIter.next())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("(");
+        Iterator<Task> iter = this.iterator();
+
+        while (iter.hasNext()) {
+            result.append(iter.next().toString()).append(", ");
+        }
+        return result + ")";
+    }
+
+    @Override
+    public LinkedList clone() {
+        LinkedList newTaskList = new LinkedList();
+
+        while (this.iterator().hasNext()) {
+            newTaskList.add(this.iterator().next().clone());
+        }
+        return newTaskList;
     }
 }

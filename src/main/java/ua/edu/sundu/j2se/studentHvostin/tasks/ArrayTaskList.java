@@ -1,5 +1,7 @@
 package ua.edu.sundu.j2se.studentHvostin.tasks;
 
+import java.util.Iterator;
+
 /**
  * void add (Task task) - это метод, который добавляет указанную задачу в список.
  * boolean remove (Task task) - это метод, который удаляет задачу из списка и возвращает true,
@@ -99,4 +101,72 @@ public class ArrayTaskList extends AbstractTaskList {
         return incomTasks;
     }
 
+    @Override
+    public int hashCode() {
+        int index = 0;
+        Task task;
+        int result = 1;
+
+        while (index < this.getSize()) {
+            task = this.getTask(index);
+            result *= task.getStartTime() + task.getEndTime() + task.getRepeatInterval();
+            ++index;
+        }
+
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object taskList) {
+        if (taskList == null)
+            return false;
+        if (this == taskList)
+            return true;
+        if (getClass() != taskList.getClass())
+            return false;
+        /*
+        ArrayTaskList other = (ArrayTaskList) taskList;
+        int index = 0;
+
+        while (index < this.getSize()) {
+            if (!this.getTask(index).equals(other.getTask(index))) {
+                return false;
+            }
+            ++index;
+        }
+        return true;
+        */
+
+        ArrayTaskList other = (ArrayTaskList) taskList;
+        Iterator<Task> otherIter = other.iterator();
+        Iterator<Task> iter = this.iterator();
+
+        while (iter.hasNext()) {
+            if (!iter.next().equals(otherIter.next())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("(");
+        Iterator<Task> iter = this.iterator();
+
+        while (iter.hasNext()) {
+            result.append(iter.next().toString()).append(", ");
+        }
+        return result + ")";
+    }
+
+    @Override
+    public ArrayTaskList clone() {
+        ArrayTaskList newTaskList = new ArrayTaskList();
+
+        while (this.iterator().hasNext()) {
+            newTaskList.add(this.iterator().next().clone());
+        }
+        return newTaskList;
+    }
 }
