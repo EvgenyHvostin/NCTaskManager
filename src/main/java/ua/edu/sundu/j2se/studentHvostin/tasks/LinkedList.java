@@ -1,5 +1,7 @@
 package ua.edu.sundu.j2se.studentHvostin.tasks;
 
+import java.util.Iterator;
+
 public class LinkedList extends AbstractTaskList {
 
     private static class Node {
@@ -173,10 +175,11 @@ public class LinkedList extends AbstractTaskList {
         if (this.head == null) {
             throw new NullPointerException("Linked list empty");
         }
-        StringBuilder result = new StringBuilder("(" + this.getTask(0).toString() + ", ");
+        StringBuilder result = new StringBuilder("(");
+        Iterator<Task> iter = this.iterator();
 
-        while (this.iterator().hasNext()) {
-            result.append(this.iterator().next().toString()).append(", ");
+        while (iter.hasNext()) {
+            result.append(iter.next().toString()).append(", ");
         }
         return result + ")";
     }

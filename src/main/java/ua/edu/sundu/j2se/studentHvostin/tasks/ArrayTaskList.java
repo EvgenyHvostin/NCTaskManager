@@ -1,5 +1,7 @@
 package ua.edu.sundu.j2se.studentHvostin.tasks;
 
+import java.util.Iterator;
+
 /**
  * void add (Task task) - это метод, который добавляет указанную задачу в список.
  * boolean remove (Task task) - это метод, который удаляет задачу из списка и возвращает true,
@@ -150,10 +152,11 @@ public class ArrayTaskList extends AbstractTaskList {
         if (this.getSize() < 0) {
             throw new NullPointerException("Linked list empty");
         }
-        String result = "(" + this.getTask(0).toString() + ", ";
+        StringBuilder result = new StringBuilder("(");
+        Iterator<Task> iter = this.iterator();
 
-        while (this.iterator().hasNext()) {
-            result += this.iterator().next().toString() + ", ";
+        while (iter.hasNext()) {
+            result.append(iter.next().toString()).append(", ");
         }
         return result + ")";
     }
