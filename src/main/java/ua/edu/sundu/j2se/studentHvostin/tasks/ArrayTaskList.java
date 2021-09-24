@@ -1,6 +1,5 @@
 package ua.edu.sundu.j2se.studentHvostin.tasks;
 
-import java.util.Arrays;
 import java.util.stream.Stream;
 
 /**

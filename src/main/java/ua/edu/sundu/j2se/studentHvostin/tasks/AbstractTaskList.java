@@ -12,9 +12,9 @@ public abstract class AbstractTaskList implements Iterable<Task> {
 
     public final AbstractTaskList incoming(final int from, final int to) {
         if (from < 0) {
-            throw new IndexOutOfBoundsException(String.format("start time %s doesn't is invalid", from));
+            throw new IndexOutOfBoundsException(String.format("start time %s is invalid", from));
         } else if (to < 0) {
-            throw new IndexOutOfBoundsException(String.format("end time %s doesn't is invalid", to));
+            throw new IndexOutOfBoundsException(String.format("end time %s is invalid", to));
         }
         AbstractTaskList incomTasks = new ArrayTaskList();
 
