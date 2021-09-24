@@ -1,4 +1,4 @@
-package com.netcracker.eductr.tests;
+package ua.edu.sundu.j2se.studentHvostin.tasks;
 
 import ua.edu.sundu.j2se.studentHvostin.tasks.factory.ListTypes;
 import ua.edu.sundu.j2se.studentHvostin.tasks.factory.TaskListFactory;

@@ -1,4 +1,4 @@
-package com.netcracker.eductr.tests;
+package ua.edu.sundu.j2se.studentHvostin.tasks;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ua.edu.sundu.j2se.studentHvostin.tasks.ArrayTaskList;
