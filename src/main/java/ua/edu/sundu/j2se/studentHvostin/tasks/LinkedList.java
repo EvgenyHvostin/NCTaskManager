@@ -160,10 +160,12 @@ public class LinkedList extends AbstractTaskList {
         return true;
          */
 
-        LinkedList other = (LinkedList) taskList;
+        LinkedList other = (LinkedList ) taskList;
+        Iterator<Task> otherIter = other.iterator();
+        Iterator<Task> iter = this.iterator();
 
-        while (this.iterator().hasNext()) {
-            if (!this.iterator().next().equals(other.iterator().next())) {
+        while (iter.hasNext()) {
+            if (!iter.next().equals(otherIter.next())) {
                 return false;
             }
         }
@@ -172,9 +174,6 @@ public class LinkedList extends AbstractTaskList {
 
     @Override
     public String toString() {
-        if (this.head == null) {
-            throw new NullPointerException("Linked list empty");
-        }
         StringBuilder result = new StringBuilder("(");
         Iterator<Task> iter = this.iterator();
 
