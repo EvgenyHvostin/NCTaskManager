@@ -10,7 +10,7 @@ public abstract class AbstractTaskList implements Iterable<Task> {
     public abstract Task getTask(final int index);
     public abstract Stream<Task> getStream();
 
-    public AbstractTaskList incoming(final int from, final int to) {
+    public final AbstractTaskList incoming(final int from, final int to) {
         if (from < 0) {
             throw new IndexOutOfBoundsException(String.format("start time %s doesn't is invalid", from));
         } else if (to < 0) {
