@@ -1,30 +1,31 @@
 package ua.edu.sundu.j2se.studentHvostin.tasks;
 
+import java.time.LocalDateTime;
+
 public class Task implements Cloneable {
 
     private String title;
-    private int time;
-    private int start;
-    private int end;
-    private int interval;
+    private LocalDateTime time;
+    private LocalDateTime start;
+    private LocalDateTime end;
+    private LocalDateTime interval;
     private boolean active;
 
-    public Task (final String title, final int time) {
-        if (time < 0) {
-            throw new IllegalArgumentException("Time cannot be negative");
+    public Task (final String title, final LocalDateTime time) {
+        if (time == null) {
+            throw new IllegalArgumentException("Time cannot be null");
         } else {
             this.title = title;
             this.time = time;
             this.active = false;
         }
-
     }
 
-    public Task (final String title, final int start, final int end, final int interval) {
-        if (start < 0 || end < 0 ) {
-            throw new IllegalArgumentException("Time cannot be negative");
-        } else if (interval <= 0) {
-            throw new IllegalArgumentException("Interval cannot be negative");
+    public Task (final String title, final LocalDateTime start, final LocalDateTime end, final LocalDateTime interval) {
+        if (start == null || end == null) {
+            throw new IllegalArgumentException("Time cannot be null");
+        } else if (interval == null) {
+            throw new IllegalArgumentException("Interval cannot be null");
         } else {
             this.title = title;
             this.start = start;
@@ -32,7 +33,6 @@ public class Task implements Cloneable {
             this.interval = interval;
             this.active = false;
         }
-
     }
 
     public String getTitle() {
@@ -51,76 +51,68 @@ public class Task implements Cloneable {
         this.active = active;
     }
 
-    public int getTime() {
-        if (this.interval > 0) {
+    public LocalDateTime getTime() {
+        if (this.interval == null) {
+            return this.time;
+        } else {
             return this.start;
-        } else {
-            return this.time;
         }
     }
 
-    public void setTime(final int time) {
-        if (time < 0) {
+    public void setTime(final LocalDateTime time) {
+        if (time == null) {
             throw new IllegalArgumentException("Time cannot be negative");
-        } else {
-            this.time = time;
-            this.interval = 0;
         }
+        this.time = time;
+        this.interval = null;
     }
 
-    public int getStartTime() {
-        if (this.interval > 0) {
-            return this.start;
-        } else {
-            return this.time;
-        }
-    }
-
-    public int getEndTime() {
-        if (this.interval > 0) {
-            return this.end;
-        } else {
-            return this.time;
-        }
-    }
-
-    public int getRepeatInterval() {
-        if (this.interval >= 0) {
-            return this.interval;
-        } else {
-            return 0;
-        }
-    }
-
-    public void setTime(final int start, final int end, final  int interval) {
-        if (start < 0 || end < 0 ) {
-            throw new IllegalArgumentException("Time cannot be negative");
-        } else if (interval <= 0) {
-            throw new IllegalArgumentException("Interval cannot be negative");
+    public void setTime(final LocalDateTime start, final LocalDateTime end, final LocalDateTime interval) {
+        if (start == null || end == null ) {
+            throw new IllegalArgumentException("Time cannot be null");
+        } else if (interval == null) {
+            throw new IllegalArgumentException("Interval cannot be null");
         } else {
             this.start = start;
             this.end = end;
             this.interval = interval;
         }
     }
-
-    public boolean isRepeated() {
-        if (this.interval > 0) {
-            return true;
+    public LocalDateTime getStartTime() {
+        if (this.interval == null) {
+            return this.time;
         } else {
-            return false;
+            return this.start;
         }
     }
 
-    public int nextTimeAfter (final int current) {
-        if ( current > this.getEndTime() ) {
-            return -1;
-        } else if (current > this.getStartTime() ) {
-            int time = this.start;
+    public LocalDateTime getEndTime() {
+        if (this.interval == null) {
+            return this.time;
+        } else {
+            return this.end;
+        }
+    }
+
+    public LocalDateTime getRepeatInterval() {
+        return this.interval;
+    }
+
+    public boolean isRepeated() {
+        return !(this.interval == null);
+    }
+
+    public LocalDateTime nextTimeAfter () {
+        LocalDateTime current = LocalDateTime.now();
+
+        if (current.isAfter(this.getEndTime())) {
+            return null;
+        } else if (current.isAfter(this.getStartTime())) {
+            LocalDateTime time = this.start;
             do {
-                time += this.interval;
+                time.isAfter(this.interval);
             }
-            while (time < current);
+            while (time.isBefore(current));
             return time;
         } else {
             return this.getStartTime();
@@ -130,11 +122,15 @@ public class Task implements Cloneable {
     @Override
     public int hashCode() {
         int active = 0;
+
         if (this.active) {
             active = 1;
         }
 
-        int result = this.getStartTime() * this.getEndTime() + getRepeatInterval() + active;
+        int result = this.getStartTime().hashCode()
+                * this.getEndTime().hashCode()
+                + getRepeatInterval().hashCode()
+                + active;
 
         return result;
     }
@@ -176,7 +172,7 @@ public class Task implements Cloneable {
 
     @Override
     public Task clone() {
-        Task newTask = new Task(null, 0);
+        Task newTask = new Task(null, null);
         if (this.isRepeated()) {
             newTask.setTitle(this.getTitle());
             newTask.setTime(

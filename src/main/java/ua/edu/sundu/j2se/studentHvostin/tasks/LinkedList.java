@@ -128,12 +128,13 @@ public class LinkedList extends AbstractTaskList {
         int index = 0;
         Task task;
         int result = 1;
-
         Node current = this.head;
 
         while (index < this.getSize()) {
             task = current.getTask();
-            result *= task.getStartTime() + task.getEndTime() + task.getRepeatInterval();
+            result *= task.getStartTime().hashCode()
+                    + task.getEndTime().hashCode()
+                    + task.getRepeatInterval().hashCode();
             current = current.getNext();
             ++index;
         }

@@ -1,75 +1,53 @@
 package ua.edu.sundu.j2se.studentHvostin.tasks;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import ua.edu.sundu.j2se.studentHvostin.tasks.ArrayTaskList;
-import ua.edu.sundu.j2se.studentHvostin.tasks.Task;
+import java.time.LocalDateTime;
 
 public class TestArrayTaskList {
 
+
     @Test
     public void add() {
-        ArrayTaskList arr = new ArrayTaskList();
-        Task testTask = new Task("task", 0, 48, 24);
+        ArrayTaskList array = new ArrayTaskList();
+        LocalDateTime time = LocalDateTime.of(0,0,0,0,0);
 
-        arr.add(testTask);
+        array.add(new Task("task0", time));
+        array.add(new Task("task1", time));
 
-        Assertions.assertEquals(arr.getTask(0), testTask);
-    }
+        Assertions.assertEquals(array.getTask(0).getTitle(), "task0");
+        Assertions.assertEquals(array.getTask(1).getTitle(), "task1");
+        Assertions.assertEquals(array.getSize(), 2);
 
-    @Test
-    public void getTask() {
-        ArrayTaskList arr = new ArrayTaskList();
-
-        Task task0 = new Task("task0", 0, 40, 10);
-        Task task1 = new Task("task1", 1, 41, 11);
-
-        arr.add(task0);
-        arr.add(task1);
-
-        Assertions.assertEquals(arr.getTask(0), task0);
-        Assertions.assertEquals(arr.getTask(1), task1);
-    }
-
-    @Test
-    public void size() {
-        ArrayTaskList arr = new ArrayTaskList();
-
-        Task task = new Task("task", 1);
-
-        arr.add(task);
-        arr.add(task);
-
-        Assertions.assertEquals(arr.getSize(), 2);
-
-        arr.add(task);
-
-        Assertions.assertEquals(arr.getSize(), 3);
     }
 
     @Test
     public void remove() {
+        ArrayTaskList array = new ArrayTaskList();
+        LocalDateTime time = LocalDateTime.of(0,0,0,0,0);
+        Task remTask = new Task("remTask", time);
 
-        ArrayTaskList arr = new ArrayTaskList();
+        array.add(remTask);
+        array.remove(remTask);
+        Assertions.assertEquals(array.getSize(), 0);
 
-        Task task0 = new Task("task", 0);
-        Task task1 = new Task("task", 1);
+        array.add(new Task("task0", time));
+        array.add(remTask);
+        array.add(new Task("task2", time));
+        array.add(remTask);
 
-        arr.add(task0);
-        arr.add(new Task("task", 10));
-        arr.add(task1);
-        arr.add(new Task("task", 20));
+        array.remove(remTask);
 
-        arr.remove(task0);
-
-        Assertions.assertEquals(arr.getSize(), 3);
-        Assertions.assertEquals(arr.getTask(1), task1);
+        Assertions.assertEquals(array.getSize(), 3);
+        Assertions.assertEquals(array.getTask(0).getTitle(), "task0");
+        Assertions.assertEquals(array.getTask(1).getTitle(), "task2");
+        Assertions.assertEquals(array.getTask(2).getTitle(), "remTask");
 
     }
-
+/*
     @Test
     public void incoming() {
-        ArrayTaskList testArray = new ArrayTaskList();
-        ArrayTaskList incomTasks = new ArrayTaskList();
+        LinkedList testArray = new LinkedList();
+        LinkedList incomTasks = new LinkedList();
 
         Task incomTask0 = new Task("task0", 50);
         Task incomTask1 = new Task("task1", 40, 80 ,10);
@@ -80,6 +58,8 @@ public class TestArrayTaskList {
         testArray.add(new Task("task", 40));
         testArray.add(new Task("task", 30));
 
-        Assertions.assertEquals(testArray.incoming(49,60).getTask(1).getTime(), 40);
+        Assertions.assertEquals(testArray.incoming(49,60).getTask(0), incomTask0);
+        Assertions.assertEquals(testArray.incoming(49,60).getTask(1), incomTask1);
     }
+ */
 }

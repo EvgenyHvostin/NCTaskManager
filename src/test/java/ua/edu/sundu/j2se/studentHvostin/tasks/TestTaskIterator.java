@@ -4,9 +4,7 @@ import ua.edu.sundu.j2se.studentHvostin.tasks.factory.ListTypes;
 import ua.edu.sundu.j2se.studentHvostin.tasks.factory.TaskListFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import ua.edu.sundu.j2se.studentHvostin.tasks.AbstractTaskList;
-import ua.edu.sundu.j2se.studentHvostin.tasks.Task;
-
+import java.time.LocalDateTime;
 import java.util.Iterator;
 
 public class TestTaskIterator {
@@ -14,10 +12,11 @@ public class TestTaskIterator {
     @Test
     public void TestIt() {
         AbstractTaskList array = new TaskListFactory().createTaskList(ListTypes.ARRAY);
-        Task testTask = new Task("task", 0, 48, 24);
+        LocalDateTime time = LocalDateTime.of(0,0,0,0,0);
+        Task testTask = new Task("testTask", time);
 
         array.add(testTask);
-        array.add(new Task("task", 1, 48, 24));
+        array.add(new Task("task", time));
         array.add(testTask);
 
         Iterator iter = array.iterator();

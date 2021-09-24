@@ -111,7 +111,9 @@ public class ArrayTaskList extends AbstractTaskList {
 
         while (index < this.getSize()) {
             task = this.getTask(index);
-            result *= task.getStartTime() + task.getEndTime() + task.getRepeatInterval();
+            result *= task.getStartTime().hashCode()
+                    + task.getEndTime().hashCode()
+                    + task.getRepeatInterval().hashCode();
             ++index;
         }
 

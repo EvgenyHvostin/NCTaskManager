@@ -1,23 +1,22 @@
 package ua.edu.sundu.j2se.studentHvostin.tasks;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import ua.edu.sundu.j2se.studentHvostin.tasks.Task;
+import java.time.LocalDateTime;
 
 public class TestTask {
 
     @Test
     public void getTask() {
-
         String trueTitle = "task";
-        int trueTime = 21;
-        int trueStart = 20;
-        int trueEnd = 40;
-        int trueInterval = 5;
+        LocalDateTime trueTime = LocalDateTime.now().plusDays(10);
+        LocalDateTime trueStart = LocalDateTime.now().plusDays(10);
+        LocalDateTime trueEnd = LocalDateTime.now().plusDays(20);
+        LocalDateTime trueInterval = LocalDateTime.of(0,0,3,0,0);
         Task testTask;
 
         testTask = new Task(trueTitle, trueTime);
         String title = testTask.getTitle();
-        int time = testTask.getTime();
+        LocalDateTime time = testTask.getTime();
 
         Assertions.assertEquals(title, trueTitle);
         Assertions.assertEquals(time, trueTime);
@@ -25,9 +24,9 @@ public class TestTask {
 
         testTask = new Task(trueTitle, trueStart, trueEnd, trueInterval);
         title = testTask.getTitle();
-        int start = testTask.getStartTime();
-        int end = testTask.getEndTime();
-        int interval = testTask.getRepeatInterval();
+        LocalDateTime start = testTask.getStartTime();
+        LocalDateTime end = testTask.getEndTime();
+        LocalDateTime interval = testTask.getRepeatInterval();
 
         Assertions.assertEquals(title, trueTitle);
         Assertions.assertEquals(start, trueStart);
@@ -38,17 +37,21 @@ public class TestTask {
 
     @Test
     public void setTask() {
-        Task t = new Task("task", 1, 2, 1); //test task
+        Task t = new Task("task", LocalDateTime.of(0,0,0,0,0));
+        LocalDateTime trueTime = LocalDateTime.now().plusDays(10);
+        LocalDateTime trueStart = LocalDateTime.now().plusDays(10);
+        LocalDateTime trueEnd = LocalDateTime.now().plusDays(20);
+        LocalDateTime trueInterval = LocalDateTime.of(0,0,3,0,0);
 
-        t.setTime(25);
+        t.setTime(trueTime);
         Assertions.assertFalse(t.isRepeated());
-        Assertions.assertEquals(t.getTime(), 25);
+        Assertions.assertEquals(t.getTime(), trueTime);
 
-        t.setTime(20, 40, 5);
+        t.setTime(trueStart, trueEnd, trueInterval);
         Assertions.assertTrue(t.isRepeated());
-        Assertions.assertEquals(t.getStartTime(), 20);
-        Assertions.assertEquals(t.getEndTime(), 40);
-        Assertions.assertEquals(t.getRepeatInterval(), 5);
+        Assertions.assertEquals(t.getStartTime(), trueStart);
+        Assertions.assertEquals(t.getEndTime(), trueEnd);
+        Assertions.assertEquals(t.getRepeatInterval(), trueInterval);
 
         Assertions.assertFalse(t.isActive());
         t.setActive(true);
@@ -57,10 +60,10 @@ public class TestTask {
 
     @Test
     public void nextTimeAfter() {
-        Task t = new Task("task", 50, 100, 10); //test task
+        LocalDateTime current = LocalDateTime.now();
+        Task t = new Task("task", current.plusDays(3));
 
-        Assertions.assertEquals(t.nextTimeAfter(49), 50);
-        Assertions.assertEquals(t.nextTimeAfter(51), 60);
-        Assertions.assertEquals(t.nextTimeAfter(101), -1);
+        Assertions.assertEquals(t.nextTimeAfter(), current.plusDays(3));
     }
+
 }

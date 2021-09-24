@@ -1,68 +1,37 @@
 package ua.edu.sundu.j2se.studentHvostin.tasks;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import ua.edu.sundu.j2se.studentHvostin.tasks.LinkedList;
-import ua.edu.sundu.j2se.studentHvostin.tasks.Task;
+import java.time.LocalDateTime;
 
 public class TestLinkedList {
 
     @Test
     public void add() {
         LinkedList link = new LinkedList();
+        LocalDateTime time = LocalDateTime.of(0,0,0,0,0);
 
-        link.add(new Task("task0", 10, 40, 5));
-        link.add(new Task("task1", 20, 50, 10));
-        link.add(new Task("task2", 30, 60, 20));
+        link.add(new Task("task0", time));
+        link.add(new Task("task1", time));
 
         Assertions.assertEquals(link.getTask(0).getTitle(), "task0");
         Assertions.assertEquals(link.getTask(1).getTitle(), "task1");
-        Assertions.assertEquals(link.getTask(2).getTitle(), "task2");
-    }
+        Assertions.assertEquals(link.getSize(), 2);
 
-    @Test
-    public void size() {
-        LinkedList link = new LinkedList();
-
-        link.add(new Task("1", 1));
-        link.add(new Task("2", 2));
-        link.add(new Task("3", 3));
-
-        Assertions.assertEquals(link.getSize(), 3);
-    }
-
-    @Test
-    public void getTask() {
-        LinkedList link = new LinkedList();
-
-        link.add(new Task("1", 1));
-        link.add(new Task("2", 2));
-        link.add(new Task("3", 3));
-
-
-        Assertions.assertEquals(link.getTask(1).getTitle(), "2");
-        Assertions.assertEquals(link.getTask(2).getTitle(), "3");
-    }
-
-    @Test
-    public void removeFirst() {
-        LinkedList link = new LinkedList();
-
-        Task remTask = new Task("remTask", 20, 50, 10);
-
-        link.add(remTask);
-        link.remove(remTask);
-        Assertions.assertEquals(link.getSize(), 0);
     }
 
     @Test
     public void remove() {
         LinkedList link = new LinkedList();
+        LocalDateTime time = LocalDateTime.of(0,0,0,0,0);
+        Task remTask = new Task("remTask", time);
 
-        Task remTask = new Task("remTask", 20, 50, 10);
-
-        link.add(new Task("task0", 10, 40, 5));
         link.add(remTask);
-        link.add(new Task("task2", 30, 60, 20));
+        link.remove(remTask);
+        Assertions.assertEquals(link.getSize(), 0);
+
+        link.add(new Task("task0", time));
+        link.add(remTask);
+        link.add(new Task("task2", time));
         link.add(remTask);
 
         link.remove(remTask);
@@ -73,7 +42,7 @@ public class TestLinkedList {
         Assertions.assertEquals(link.getTask(2).getTitle(), "remTask");
 
     }
-
+/*
     @Test
     public void incoming() {
         LinkedList testArray = new LinkedList();
@@ -91,4 +60,5 @@ public class TestLinkedList {
         Assertions.assertEquals(testArray.incoming(49,60).getTask(0), incomTask0);
         Assertions.assertEquals(testArray.incoming(49,60).getTask(1), incomTask1);
     }
+ */
 }
