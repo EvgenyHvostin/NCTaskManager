@@ -11,7 +11,7 @@ public class TestTask {
         LocalDateTime trueTime = LocalDateTime.now().plusDays(10);
         LocalDateTime trueStart = LocalDateTime.now().plusDays(10);
         LocalDateTime trueEnd = LocalDateTime.now().plusDays(20);
-        LocalDateTime trueInterval = LocalDateTime.of(0,0,3,0,0);
+        int trueInterval = 3;
         Task testTask;
 
         testTask = new Task(trueTitle, trueTime);
@@ -26,7 +26,7 @@ public class TestTask {
         title = testTask.getTitle();
         LocalDateTime start = testTask.getStartTime();
         LocalDateTime end = testTask.getEndTime();
-        LocalDateTime interval = testTask.getRepeatInterval();
+        int interval = testTask.getRepeatInterval();
 
         Assertions.assertEquals(title, trueTitle);
         Assertions.assertEquals(start, trueStart);
@@ -37,11 +37,11 @@ public class TestTask {
 
     @Test
     public void setTask() {
-        Task t = new Task("task", LocalDateTime.of(0,0,0,0,0));
+        Task t = new Task("task", LocalDateTime.of(1,1,1,1,1));
         LocalDateTime trueTime = LocalDateTime.now().plusDays(10);
         LocalDateTime trueStart = LocalDateTime.now().plusDays(10);
         LocalDateTime trueEnd = LocalDateTime.now().plusDays(20);
-        LocalDateTime trueInterval = LocalDateTime.of(0,0,3,0,0);
+        int trueInterval = 3;
 
         t.setTime(trueTime);
         Assertions.assertFalse(t.isRepeated());

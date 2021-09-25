@@ -8,7 +8,7 @@ public class TestLinkedList {
     @Test
     public void add() {
         LinkedList link = new LinkedList();
-        LocalDateTime time = LocalDateTime.of(0,0,0,0,0);
+        LocalDateTime time = LocalDateTime.of(1,1,1,1,1);
 
         link.add(new Task("task0", time));
         link.add(new Task("task1", time));
@@ -22,7 +22,7 @@ public class TestLinkedList {
     @Test
     public void remove() {
         LinkedList link = new LinkedList();
-        LocalDateTime time = LocalDateTime.of(0,0,0,0,0);
+        LocalDateTime time = LocalDateTime.of(1,1,1,1,1);
         Task remTask = new Task("remTask", time);
 
         link.add(remTask);

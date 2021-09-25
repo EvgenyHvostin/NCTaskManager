@@ -1,6 +1,7 @@
 package ua.edu.sundu.j2se.studentHvostin.tasks;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 public class Task implements Cloneable {
 
@@ -8,7 +9,7 @@ public class Task implements Cloneable {
     private LocalDateTime time;
     private LocalDateTime start;
     private LocalDateTime end;
-    private LocalDateTime interval;
+    private int interval;
     private boolean active;
 
     public Task (final String title, final LocalDateTime time) {
@@ -21,11 +22,11 @@ public class Task implements Cloneable {
         }
     }
 
-    public Task (final String title, final LocalDateTime start, final LocalDateTime end, final LocalDateTime interval) {
+    public Task (final String title, final LocalDateTime start, final LocalDateTime end, final int interval) {
         if (start == null || end == null) {
             throw new IllegalArgumentException("Time cannot be null");
-        } else if (interval == null) {
-            throw new IllegalArgumentException("Interval cannot be null");
+        } else if (interval <= 0) {
+            throw new IllegalArgumentException("Interval cannot be negative");
         } else {
             this.title = title;
             this.start = start;
@@ -52,7 +53,7 @@ public class Task implements Cloneable {
     }
 
     public LocalDateTime getTime() {
-        if (this.interval == null) {
+        if (this.interval == 0) {
             return this.time;
         } else {
             return this.start;
@@ -64,14 +65,14 @@ public class Task implements Cloneable {
             throw new IllegalArgumentException("Time cannot be negative");
         }
         this.time = time;
-        this.interval = null;
+        this.interval = 0;
     }
 
-    public void setTime(final LocalDateTime start, final LocalDateTime end, final LocalDateTime interval) {
+    public void setTime(final LocalDateTime start, final LocalDateTime end, final int interval) {
         if (start == null || end == null ) {
             throw new IllegalArgumentException("Time cannot be null");
-        } else if (interval == null) {
-            throw new IllegalArgumentException("Interval cannot be null");
+        } else if (interval <= 0) {
+            throw new IllegalArgumentException("Interval cannot be negative");
         } else {
             this.start = start;
             this.end = end;
@@ -79,7 +80,7 @@ public class Task implements Cloneable {
         }
     }
     public LocalDateTime getStartTime() {
-        if (this.interval == null) {
+        if (this.interval == 0) {
             return this.time;
         } else {
             return this.start;
@@ -87,19 +88,19 @@ public class Task implements Cloneable {
     }
 
     public LocalDateTime getEndTime() {
-        if (this.interval == null) {
+        if (this.interval == 0) {
             return this.time;
         } else {
             return this.end;
         }
     }
 
-    public LocalDateTime getRepeatInterval() {
+    public int getRepeatInterval() {
         return this.interval;
     }
 
     public boolean isRepeated() {
-        return !(this.interval == null);
+        return (this.interval > 0);
     }
 
     public LocalDateTime nextTimeAfter () {
@@ -110,7 +111,7 @@ public class Task implements Cloneable {
         } else if (current.isAfter(this.getStartTime())) {
             LocalDateTime time = this.start;
             do {
-                time.isAfter(this.interval);
+                time.plus(this.interval, ChronoUnit.DAYS);
             }
             while (time.isBefore(current));
             return time;
@@ -129,7 +130,7 @@ public class Task implements Cloneable {
 
         int result = this.getStartTime().hashCode()
                 * this.getEndTime().hashCode()
-                + getRepeatInterval().hashCode()
+                + getRepeatInterval()
                 + active;
 
         return result;

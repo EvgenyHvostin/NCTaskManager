@@ -106,14 +106,10 @@ public class ArrayTaskList extends AbstractTaskList {
     @Override
     public int hashCode() {
         int index = 0;
-        Task task;
         int result = 1;
 
         while (index < this.getSize()) {
-            task = this.getTask(index);
-            result *= task.getStartTime().hashCode()
-                    + task.getEndTime().hashCode()
-                    + task.getRepeatInterval().hashCode();
+            result *= this.getTask(index).hashCode();
             ++index;
         }
 

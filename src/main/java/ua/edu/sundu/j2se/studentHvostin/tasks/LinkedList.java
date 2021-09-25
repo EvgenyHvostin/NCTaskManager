@@ -126,15 +126,11 @@ public class LinkedList extends AbstractTaskList {
     @Override
     public int hashCode() {
         int index = 0;
-        Task task;
         int result = 1;
         Node current = this.head;
 
         while (index < this.getSize()) {
-            task = current.getTask();
-            result *= task.getStartTime().hashCode()
-                    + task.getEndTime().hashCode()
-                    + task.getRepeatInterval().hashCode();
+            result *= current.getTask().hashCode();
             current = current.getNext();
             ++index;
         }

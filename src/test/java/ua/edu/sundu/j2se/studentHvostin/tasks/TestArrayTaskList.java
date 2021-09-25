@@ -9,7 +9,7 @@ public class TestArrayTaskList {
     @Test
     public void add() {
         ArrayTaskList array = new ArrayTaskList();
-        LocalDateTime time = LocalDateTime.of(0,0,0,0,0);
+        LocalDateTime time = LocalDateTime.of(1,1,1,1,1);
 
         array.add(new Task("task0", time));
         array.add(new Task("task1", time));
@@ -23,7 +23,7 @@ public class TestArrayTaskList {
     @Test
     public void remove() {
         ArrayTaskList array = new ArrayTaskList();
-        LocalDateTime time = LocalDateTime.of(0,0,0,0,0);
+        LocalDateTime time = LocalDateTime.of(1,1,1,1,1);
         Task remTask = new Task("remTask", time);
 
         array.add(remTask);
