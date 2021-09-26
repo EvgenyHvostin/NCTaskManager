@@ -12,7 +12,7 @@ public class TestTaskIterator {
     @Test
     public void TestIt() {
         AbstractTaskList array = new TaskListFactory().createTaskList(ListTypes.ARRAY);
-        LocalDateTime time = LocalDateTime.of(0,0,0,0,0);
+        LocalDateTime time = LocalDateTime.of(1,1,1,1,1);
         Task testTask = new Task("testTask", time);
 
         array.add(testTask);

@@ -10,7 +10,7 @@ public class TestAbstractFactory {
     @Test
     public void addArray() {
         AbstractTaskList array = new TaskListFactory().createTaskList(ListTypes.ARRAY);
-        LocalDateTime time = LocalDateTime.of(0,0,0,0,0);
+        LocalDateTime time = LocalDateTime.of(1,1,1,1,1);
         Task testTask = new Task("task", time);
 
         array.add(testTask);
@@ -21,7 +21,7 @@ public class TestAbstractFactory {
     @Test
     public void addLinked() {
         AbstractTaskList linked =new TaskListFactory().createTaskList(ListTypes.LINKED);
-        LocalDateTime time = LocalDateTime.of(0,0,0,0,0);
+        LocalDateTime time = LocalDateTime.of(1,1,1,1,1);
         Task testTask = new Task("task", time);
 
         linked.add(testTask);
