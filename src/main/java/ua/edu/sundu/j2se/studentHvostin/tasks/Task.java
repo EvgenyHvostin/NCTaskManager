@@ -2,6 +2,7 @@ package ua.edu.sundu.j2se.studentHvostin.tasks;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.Set;
 
 public class Task implements Cloneable {
 
@@ -79,6 +80,7 @@ public class Task implements Cloneable {
             this.interval = interval;
         }
     }
+
     public LocalDateTime getStartTime() {
         if (this.interval == 0) {
             return this.time;
@@ -186,4 +188,5 @@ public class Task implements Cloneable {
         }
         return newTask;
     }
+
 }
