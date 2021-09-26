@@ -1,10 +1,10 @@
 package ua.edu.sundu.j2se.studentHvostin.tasks;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.Set;
 
-public class Task implements Cloneable {
+public class Task implements Cloneable, Serializable {
 
     private String title;
     private LocalDateTime time;
