@@ -6,7 +6,7 @@ import com.google.gson.GsonBuilder;
 import java.io.*;
 
 public class TaskIO {
-    public static void write(AbstractTaskList tasks, OutputStream out) {
+    public static void write(final AbstractTaskList tasks, OutputStream out) {
         try {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(out);
             GsonBuilder builder = new GsonBuilder();
@@ -19,9 +19,9 @@ public class TaskIO {
             e.printStackTrace();
         }
 
-    }// записывает задачи из списка в поток в двоичном формате.
+    }
 
-    public static void read(AbstractTaskList tasks, InputStream in) {
+    public static void read(AbstractTaskList tasks, final InputStream in) {
 
         try {
             ObjectInputStream objectInputStream = new ObjectInputStream(in);
@@ -38,9 +38,9 @@ public class TaskIO {
         }
 
 
-    }// считывает задачи из потока в текущий список задач.
+    }
 
-    public static void writeBinary(AbstractTaskList tasks, File file) {
+    public static void writeBinary(final AbstractTaskList tasks, File file) {
 
         try {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(file));
@@ -55,9 +55,9 @@ public class TaskIO {
             e.printStackTrace();
         }
 
-    }// записывает задачи из списка в файл.
+    }
 
-    public static void readBinary(AbstractTaskList tasks, File file) {
+    public static void readBinary(AbstractTaskList tasks, final File file) {
 
         try {
             ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(file));
@@ -74,6 +74,6 @@ public class TaskIO {
             e.printStackTrace();
         }
 
-    }// считывает задачи из файла в список задач.
+    }
 
 }

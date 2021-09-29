@@ -56,6 +56,9 @@ public class TestTask {
         Assertions.assertFalse(t.isActive());
         t.setActive(true);
         Assertions.assertTrue(t.isActive());
+
+        Assertions.assertEquals(t, t.clone());
+
     }
 
     @Test
@@ -63,7 +66,7 @@ public class TestTask {
         LocalDateTime current = LocalDateTime.now();
         Task t = new Task("task", current.plusDays(3));
 
-        Assertions.assertEquals(t.nextTimeAfter(), current.plusDays(3));
+        Assertions.assertEquals(t.nextTimeAfter(LocalDateTime.now()), current.plusDays(3));
     }
 
 }

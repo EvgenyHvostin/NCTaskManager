@@ -108,8 +108,7 @@ public class Task implements Cloneable, Serializable {
         return (this.interval > 0);
     }
 
-    public LocalDateTime nextTimeAfter () {
-        LocalDateTime current = LocalDateTime.now();
+    public LocalDateTime nextTimeAfter (final LocalDateTime current) {
 
         if (current.isAfter(this.getEndTime())) {
             return null;
@@ -142,7 +141,7 @@ public class Task implements Cloneable, Serializable {
     }
 
     @Override
-    public boolean equals(Object task) {
+    public boolean equals(final Object task) {
         if (task == null)
             return false;
         if (this == task)
@@ -176,9 +175,11 @@ public class Task implements Cloneable, Serializable {
         return result + ")";
     }
 
+    private Task () {}
+
     @Override
     public Task clone() {
-        Task newTask = new Task(null, null);
+        Task newTask = new Task();
         if (this.isRepeated()) {
             newTask.setTitle(this.getTitle());
             newTask.setTime(

@@ -7,7 +7,9 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 public class Tasks {
-    public static Iterable<Task> incoming(Iterable<Task> tasks, LocalDateTime start, LocalDateTime end) {
+    public static Iterable<Task> incoming(
+            final Iterable<Task> tasks,final  LocalDateTime start,final  LocalDateTime end) {
+
         Iterator<Task> incomTaks = tasks.iterator();
         Task task;
 
@@ -21,7 +23,7 @@ public class Tasks {
     }
 
     public static SortedMap<LocalDateTime, Set<Task>> calendar(
-            Iterable<Task> tasks, LocalDateTime start, LocalDateTime end) {
+            final Iterable<Task> tasks, final LocalDateTime start, final LocalDateTime end) {
 
         Iterator<Task> incomTaks = tasks.iterator();
         Task task;

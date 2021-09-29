@@ -117,7 +117,7 @@ public class ArrayTaskList extends AbstractTaskList {
     }
 
     @Override
-    public boolean equals(Object taskList) {
+    public boolean equals(final Object taskList) {
         if (taskList == null)
             return false;
         if (this == taskList)
