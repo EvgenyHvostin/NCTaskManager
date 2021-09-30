@@ -73,7 +73,7 @@ public class ArrayTaskList extends AbstractTaskList {
 
     public int getSize() {
         int i = 0;
-        while (this.tasks[i] != null || i == this.tasks.length - 1) {
+        while (i == this.tasks.length - 2 || this.tasks[i] != null) {
             i++;
         }
         return i;

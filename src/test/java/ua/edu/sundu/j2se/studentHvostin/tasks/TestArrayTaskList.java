@@ -13,10 +13,16 @@ public class TestArrayTaskList {
 
         array.add(new Task("task0", time));
         array.add(new Task("task1", time));
+        array.add(new Task("task1", time));
+        array.add(new Task("task1", time));
+        array.add(new Task("task1", time));
+        array.add(new Task("task1", time));
+        array.add(new Task("task1", time));
+        array.add(new Task("task1", time));
 
         Assertions.assertEquals(array.getTask(0).getTitle(), "task0");
         Assertions.assertEquals(array.getTask(1).getTitle(), "task1");
-        Assertions.assertEquals(array.getSize(), 2);
+        Assertions.assertEquals(array.getSize(), 8);
 
     }
 
