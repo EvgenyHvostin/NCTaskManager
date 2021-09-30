@@ -8,12 +8,12 @@ import java.io.*;
 public class TaskIO {
     public static void write(final AbstractTaskList tasks, OutputStream out) {
         try {
+
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(out);
             GsonBuilder builder = new GsonBuilder();
             Gson gson = builder.create();
 
             objectOutputStream.write(gson.toJson(tasks).getBytes());
-            //out.write(gson.toJson(tasks).getBytes());
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -27,25 +27,22 @@ public class TaskIO {
             ObjectInputStream objectInputStream = new ObjectInputStream(in);
             GsonBuilder builder = new GsonBuilder();
             Gson gson = builder.create();
+            AbstractTaskList readTasks;
 
-            tasks = gson.fromJson(String.valueOf(objectInputStream), AbstractTaskList.class);
+            readTasks = gson.fromJson(String.valueOf(objectInputStream), AbstractTaskList.class);
 
-
-            //tasks = (AbstractTaskList) objectInputStream.readObject();
-
+            for (int i = 0; i <= readTasks.getSize(); i++) {
+                tasks.add(readTasks.getTask(i));
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
     public static void writeBinary(final AbstractTaskList tasks, File file) {
 
         try {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(file));
-
-
             GsonBuilder builder = new GsonBuilder();
             Gson gson = builder.create();
 
@@ -61,19 +58,18 @@ public class TaskIO {
 
         try {
             ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(file));
-
-
             GsonBuilder builder = new GsonBuilder();
             Gson gson = builder.create();
+            AbstractTaskList readTasks;
 
-            tasks = gson.fromJson(String.valueOf(objectInputStream), AbstractTaskList.class);
+            readTasks = gson.fromJson(String.valueOf(objectInputStream), AbstractTaskList.class);
 
-
+            for (int i = 0; i <= readTasks.getSize(); i++) {
+                tasks.add(readTasks.getTask(i));
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
-
 }

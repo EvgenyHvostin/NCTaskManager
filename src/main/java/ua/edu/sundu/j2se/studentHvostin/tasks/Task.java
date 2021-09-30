@@ -9,6 +9,8 @@ import java.time.temporal.ChronoUnit;
 
 public class Task implements Cloneable, Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     private String title;
     private LocalDateTime time;
     private LocalDateTime start;
