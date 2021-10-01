@@ -3,6 +3,7 @@ package ua.edu.sundu.j2se.studentHvostin.tasks;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
+import java.util.*;
 
 public class TestTasks {
 
@@ -10,58 +11,52 @@ public class TestTasks {
     public void testIncoming() {
 
         ArrayTaskList testList = new ArrayTaskList();
-        ArrayTaskList  incomTasks;
+        ArrayTaskList incomTasks;
+        LocalDateTime time = LocalDateTime.of(1,1,1,1,1);
 
-        LocalDateTime start = LocalDateTime.of(1,1,15,1,1);
-        LocalDateTime end = LocalDateTime.of(1,1,20,1,1);
+        LocalDateTime start = time.plusDays(15);
+        LocalDateTime end = time.plusDays(20);
 
-        Task incomTask0 = new Task("0", LocalDateTime.of(1,1,15,1,1));
-        Task incomTask1 = new Task("1",
-                LocalDateTime.of(1,1,10,1,1),
-                LocalDateTime.of(1,1,30,1,1), 10);
-
+        Task incomTask0 = new Task("0", time.plusDays(15));
+        Task incomTask1 = new Task("1", time.plusDays(10), time.plusDays(30), 10);
 
         testList.add(incomTask0);
         testList.add(incomTask1);
 
         incomTasks = testList.clone();
 
-        testList.add(new Task("task0", LocalDateTime.of(1,1,14,1,1)));
-        testList.add(new Task("task1", LocalDateTime.of(1,1,21,1,1)));
-        testList.add(new Task("task2",
-                LocalDateTime.of(1,1,10,1,1),
-                LocalDateTime.of(1,1,30,1,1), 20));
+        testList.add(new Task("fail0", time.plusDays(14)));
+        testList.add(new Task("fail1", time.plusDays(21)));
+        testList.add(new Task("fail2", time.plusDays(10), time.plusDays(30), 20));
 
         Assertions.assertEquals(Tasks.incoming(testList,start,end), incomTasks);
 
     }
-/*
+
     @Test
     public void testCalendar() {
 
-        AbstractTaskList testList = new ArrayTaskList();
-        Task incomTask0 = new Task("0", LocalDateTime.now().plusDays(50));
-        Task incomTask1 = new Task("1",
-                LocalDateTime.now().plusDays(40),
-                LocalDateTime.now().plusDays(80), 10);
-        LocalDateTime start = LocalDateTime.now().plusDays(49);
-        LocalDateTime end = LocalDateTime.now().plusDays(60);
+        ArrayTaskList testList = new ArrayTaskList();
+        SortedMap<LocalDateTime, Set<String>> trueCalendar = new TreeMap<>();
+        LocalDateTime time = LocalDateTime.of(1,1,1,1,1);
 
-        testList.add(incomTask0);
-        testList.add(incomTask0);
-        testList.add(incomTask0);
-        testList.add(incomTask0);
-        testList.add(incomTask1);
+        LocalDateTime start = time.plusDays(10);
+        LocalDateTime end = time.plusDays(30);
 
-        testList.add(new Task("task1", LocalDateTime.now().plusDays(40)));
-        testList.add(new Task("task2", LocalDateTime.now().plusDays(30)));
+        testList.add(new Task("0", time.plusDays(10)));
+        testList.add(new Task("1", time.plusDays(20), time.plusDays(40), 10));
+        testList.add(new Task("fail0", time.plusDays(9)));
+        testList.add(new Task("fail1", time.plusDays(31)));
 
-        SortedMap<LocalDateTime, Set<String>> testCal = Tasks.calendar(testList,start,end);
+        trueCalendar.put(time.plusDays(10), new TreeSet<String>(Collections.singleton("0")));
+        trueCalendar.put(time.plusDays(20), new TreeSet<String>(Collections.singleton("1")));
+        trueCalendar.put(time.plusDays(30), new TreeSet<String>(Collections.singleton("1")));
 
-        System.out.println("Key : " + testCal.keySet() + "\nValue : " + testCal.values());
+        Assertions.assertEquals(Tasks.calendar(testList,start,end), trueCalendar);
+
+        //SortedMap<LocalDateTime, Set<String>> testCal = Tasks.calendar(testList,start,end);
+        //System.out.println("Key : " + testCal.keySet() + "\nValue : " + testCal.values());
 
     }
-
-     */
 
 }

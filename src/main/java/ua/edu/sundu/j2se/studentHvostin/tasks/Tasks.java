@@ -44,27 +44,28 @@ public class Tasks {
 
         while (iter.hasNext()) {
             task = iter.next();
+            LocalDateTime time;
 
-            if (start.isBefore(task.getEndTime()) && task.getStartTime().isBefore(end)) {
-                if (task.isRepeated()) {
-                    if (task.nextTimeAfter(start).isBefore(end)) {
-                        LocalDateTime time = task.nextTimeAfter(start);
+            if (task.isRepeated()) {
+                time = task.nextTimeAfter(start);
 
-                        while (time.isBefore(task.getEndTime())) {
-                            if (calendar.containsKey(task.getTime())) {
-                                final Set<String> set = calendar.get(task.getTime());
+                while ( ! time.isAfter(end)) {
+                    if (calendar.containsKey(time)) {
+                        final Set<String> set = calendar.get(time);
 
-                                set.add(task.getTitle());
-                            } else {
-                                final Set<String> set = new TreeSet<>();
+                        set.add(task.getTitle());
+                    } else {
+                        final Set<String> set = new TreeSet<>();
 
-                                set.add(task.getTitle());
-                                calendar.put(task.getTime(), set);
-                            }
-                            time = task.nextTimeAfter(time);
-                        }
+                        set.add(task.getTitle());
+                        calendar.put(time, set);
                     }
-                } else {
+                    time = time.plusDays(task.getRepeatInterval());
+                }
+            } else {
+                time = task.getTime();
+
+                if ( ! (time.isBefore(start) || time.isAfter(end))) {
                     if (calendar.containsKey(task.getTime())) {
                         final Set<String> set = calendar.get(task.getTime());
                         set.add(task.getTitle());
