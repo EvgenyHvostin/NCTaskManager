@@ -3,7 +3,7 @@ package ua.edu.sundu.j2se.studentHvostin.tasks;
 import java.util.Iterator;
 import java.util.stream.Stream;
 
-public class LinkedList extends AbstractTaskList {
+public class LinkedList extends AbstractTaskList implements Cloneable {
 
     private static class Node {
         private Task task;
@@ -89,7 +89,7 @@ public class LinkedList extends AbstractTaskList {
     }
 
     public Task getTask(int index) {
-        if (index < 0 || index > this.size) {
+        if (index < 0 || index >= this.size) {
             throw new IndexOutOfBoundsException(String.format("The Task with index %s doesn't exist", index));
         } else {
             Node current = this.head;
@@ -102,26 +102,6 @@ public class LinkedList extends AbstractTaskList {
             return current.getTask();
         }
     }
-    /*
-    public LinkedList incoming(final int from, final int to) {
-        if (from < 0) {
-            throw new IndexOutOfBoundsException(String.format("start time %s doesn't is invalid", from));
-        } else if (to < 0) {
-            throw new IndexOutOfBoundsException(String.format("end time %s doesn't is invalid", to));
-        }
-
-        LinkedList incomTasks = new LinkedList();
-        Node current = this.head;
-
-        while (current != null) {
-            if (from <= current.getTask().getEndTime() && current.getTask().getTime() <= to) {
-                incomTasks.add(current.getTask());
-            }
-            current = current.getNext();
-        }
-        return incomTasks;
-    }
-     */
 
     @Override
     public int hashCode() {
@@ -146,25 +126,12 @@ public class LinkedList extends AbstractTaskList {
             return true;
         if (getClass() != taskList.getClass())
             return false;
-        /*
-        LinkedList other = (LinkedList) taskList;
-        int index = 0;
-
-        while (index < this.getSize()) {
-            if (!this.getTask(index).equals(other.getTask(index))) {
-                return false;
-            }
-            ++index;
-        }
-        return true;
-         */
 
         LinkedList other = (LinkedList ) taskList;
         Iterator<Task> otherIter = other.iterator();
-        Iterator<Task> iter = this.iterator();
 
-        while (iter.hasNext()) {
-            if (!iter.next().equals(otherIter.next())) {
+        for (Task task : this) {
+            if (!task.equals(otherIter.next())) {
                 return false;
             }
         }
@@ -185,10 +152,9 @@ public class LinkedList extends AbstractTaskList {
     @Override
     public LinkedList clone() {
         LinkedList newTaskList = new LinkedList();
-        Iterator<Task> iter = this.iterator();
 
-        while (iter.hasNext()) {
-            newTaskList.add(iter.next().clone());
+        for (Task task : this) {
+            newTaskList.add(task.clone());
         }
         return newTaskList;
     }

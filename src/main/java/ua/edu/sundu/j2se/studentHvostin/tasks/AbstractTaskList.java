@@ -11,6 +11,7 @@ public abstract class AbstractTaskList implements Iterable<Task>, Cloneable, Ser
     public abstract boolean remove(final Task task);
     public abstract int getSize();
     public abstract Task getTask(final int index);
+    public abstract AbstractTaskList clone();
 
     @Override
     public Iterator<Task> iterator(){

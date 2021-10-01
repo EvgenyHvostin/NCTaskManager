@@ -119,7 +119,7 @@ public class Task implements Cloneable, Serializable {
             do {
                 time = time.plus(this.interval, ChronoUnit.DAYS);
             }
-            while (time.isBefore(current));
+            while (!time.isAfter(current));
             return time;
         } else {
             return this.getStartTime();

@@ -5,7 +5,6 @@ import java.util.Iterator;
 public class TaskIterator implements Iterator<Task> {
 
     private AbstractTaskList taskList;
-    private final int size;
     private int index = 0;
 
     public TaskIterator (final AbstractTaskList taskList) {
@@ -13,12 +12,11 @@ public class TaskIterator implements Iterator<Task> {
             throw new IllegalArgumentException("Empty task list");
         }
         this.taskList = taskList;
-        this.size = taskList.getSize();
     }
 
     @Override
     public boolean hasNext() {
-        return this.index < this.size;
+        return this.index < this.taskList.getSize();
     }
 
     @Override
@@ -31,6 +29,7 @@ public class TaskIterator implements Iterator<Task> {
 
     @Override
     public void remove() {
-        this.taskList.remove(this.taskList.getTask(this.index));
+        this.taskList.remove(this.taskList.getTask(--this.index));
+
     }
 }

@@ -19,7 +19,7 @@ import java.util.stream.Stream;
  * хотя бы один раз после the "from" время, и не позднее "to" time.
  */
 
-public class ArrayTaskList extends AbstractTaskList {
+public class ArrayTaskList extends AbstractTaskList implements Cloneable {
 
     private Task[] tasks = new Task[8];
 
@@ -80,28 +80,12 @@ public class ArrayTaskList extends AbstractTaskList {
     }
 
     public Task getTask(final int index) {
-        if (index >= this.tasks.length || tasks[index] == null) {
+        if (index < 0 || index >= this.getSize()) {
             throw new IndexOutOfBoundsException(String.format("The Task with index %s doesn't exist", index));
         } else {
             return this.tasks[index];
         }
     }
-    /*
-    public ArrayTaskList incoming(final int from, final int to) {
-        ArrayTaskList incomTasks = new ArrayTaskList();
-
-        for (int index = 0; index <= this.getSize(); index++) {
-            if (this.tasks[index] == null) {
-                break;
-            } else {
-                if (from <= this.tasks[index].getEndTime() && this.tasks[index].getTime() <= to) {
-                    incomTasks.add(this.tasks[index]);
-                }
-            }
-        }
-        return incomTasks;
-    }
-     */
 
     @Override
     public int hashCode() {
@@ -124,25 +108,12 @@ public class ArrayTaskList extends AbstractTaskList {
             return true;
         if (getClass() != taskList.getClass())
             return false;
-        /*
-        ArrayTaskList other = (ArrayTaskList) taskList;
-        int index = 0;
-
-        while (index < this.getSize()) {
-            if (!this.getTask(index).equals(other.getTask(index))) {
-                return false;
-            }
-            ++index;
-        }
-        return true;
-        */
 
         ArrayTaskList other = (ArrayTaskList) taskList;
         Iterator<Task> otherIter = other.iterator();
-        Iterator<Task> iter = this.iterator();
 
-        while (iter.hasNext()) {
-            if (!iter.next().equals(otherIter.next())) {
+        for (Task task : this) {
+            if (!task.equals(otherIter.next())) {
                 return false;
             }
         }
@@ -163,10 +134,9 @@ public class ArrayTaskList extends AbstractTaskList {
     @Override
     public ArrayTaskList clone() {
         ArrayTaskList newTaskList = new ArrayTaskList();
-        Iterator<Task> iter = this.iterator();
 
-        while (iter.hasNext()) {
-            newTaskList.add(iter.next().clone());
+        for (Task task : this) {
+            newTaskList.add(task.clone());
         }
         return newTaskList;
     }

@@ -14,21 +14,22 @@ public class Tasks {
 
         while (incomingTask.hasNext()) {
             task = incomingTask.next();
-            if (!start.isBefore(task.getEndTime()) && !task.getStartTime().isBefore(end)) {
-                if (task.isRepeated()) {
-                    LocalDateTime time = task.nextTimeAfter(start);
 
-                    while (time.isBefore(end)) {
-                        if (time.isAfter(start)) {
-                            incomingTask.remove();
-                            break;
-                        }
-                        time = task.nextTimeAfter(time);
-                    }
+            if (task.isRepeated()) {
+                if (task.getEndTime().isBefore(start) || task.getStartTime().isAfter(end)) {
+                    incomingTask.remove();
                 } else {
+                    if (task.nextTimeAfter(start).isAfter(end)) {
+                        incomingTask.remove();
+                    }
+                }
+            } else {
+                if (task.getTime().isBefore(start) || task.getTime().isAfter(end)) {
                     incomingTask.remove();
                 }
             }
+
+
         }
         return tasks;
 
