@@ -1,25 +1,12 @@
 package ua.edu.sundu.j2se.studentHvostin.tasks;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.stream.Stream;
 
-/**
- * void add (Task task) - это метод, который добавляет указанную задачу в список.
- * boolean remove (Task task) - это метод, который удаляет задачу из списка и возвращает true,
- * если такая задача была в списке. Если в списке несколько задач одного типа, любую из них следует удалить.
- * int size()- это метод, который возвращает количество задач списка.
- * Task getTask(int index) - метод, возвращающий задачу, занимающую указанное место в списке;
- * индекс первой задачи 0.
- * <p>
- * Кроме того, приложение должно знать,
- * какие задачи из списка запланированы хотя бы один раз в определенном интервале,
- * например, какие задачи запланированы на следующую неделю. Чтобы реализовать это,
- * создайте the ArrayTaskList incoming(int from, int to) method in the ArrayTaskList class.
- * Этот метод возвращает подмножество задач, которые запланированы для выполнения
- * хотя бы один раз после the "from" время, и не позднее "to" time.
- */
+public class ArrayTaskList extends AbstractTaskList implements Cloneable, Serializable {
 
-public class ArrayTaskList extends AbstractTaskList implements Cloneable {
+    private static final long serialVersionUID = 1L;
 
     private Task[] tasks = new Task[8];
 

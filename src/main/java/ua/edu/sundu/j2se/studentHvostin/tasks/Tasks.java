@@ -3,7 +3,6 @@ package ua.edu.sundu.j2se.studentHvostin.tasks;
 import java.time.LocalDateTime;
 import java.util.*;
 
-
 public class Tasks {
 
     public static Iterable<Task> incoming(

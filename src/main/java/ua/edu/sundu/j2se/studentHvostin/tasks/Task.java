@@ -1,11 +1,8 @@
 package ua.edu.sundu.j2se.studentHvostin.tasks;
 
-import com.google.gson.annotations.JsonAdapter;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-
 
 public class Task implements Cloneable, Serializable {
 

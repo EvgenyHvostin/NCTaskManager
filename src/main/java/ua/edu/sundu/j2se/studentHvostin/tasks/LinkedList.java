@@ -1,9 +1,12 @@
 package ua.edu.sundu.j2se.studentHvostin.tasks;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.stream.Stream;
 
-public class LinkedList extends AbstractTaskList implements Cloneable {
+public class LinkedList extends AbstractTaskList implements Cloneable, Serializable {
+
+    private static final long serialVersionUID = 2L;
 
     private static class Node {
         private Task task;
