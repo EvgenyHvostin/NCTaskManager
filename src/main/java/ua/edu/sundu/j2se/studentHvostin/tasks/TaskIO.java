@@ -1,44 +1,65 @@
 package ua.edu.sundu.j2se.studentHvostin.tasks;
 
 import com.google.gson.*;
-
+import com.google.gson.reflect.TypeToken;
 import java.io.*;
 import java.lang.reflect.Type;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.ArrayList;
 
 public class TaskIO {
 
-    public static void write(AbstractTaskList tasks, OutputStream out) throws IOException {
+    public static void write(final AbstractTaskList tasks, OutputStream out) throws IOException {
         try(ObjectOutputStream objectStream = new ObjectOutputStream(out)) {
             objectStream.writeObject(tasks);
         }
     }
 
-    public static void read(AbstractTaskList tasks, InputStream in) throws IOException, ClassNotFoundException {
+    public static void read(AbstractTaskList tasks, final InputStream in) throws IOException, ClassNotFoundException {
         try(ObjectInputStream objectStream = new ObjectInputStream(in)) {
             AbstractTaskList readTasks = tasks.getClass().cast(objectStream.readObject());
-            for (int i = 0; i <= readTasks.getSize(); i++) {
+            for (int i = 0; i < readTasks.getSize(); i++) {
                 tasks.add(readTasks.getTask(i));
             }
         }
     }
 
-    public static void write(AbstractTaskList tasks, Writer out) throws IOException {
-        GsonBuilder builder = new GsonBuilder();
-        com.google.gson.Gson gson = new GsonBuilder().registerTypeAdapter(Task.class, new TaskSerializer())
-                .create();
+    public static void write(final AbstractTaskList tasks, Writer out) throws IOException {
+        com.google.gson.Gson gson = new GsonBuilder()
+                .registerTypeAdapter(Task.class, new TaskSerializer()).create();
+
+        //out.append(gson.toJson(tasks.getTask(0)));
+        ArrayList<Task> ser = new ArrayList<>();
+
         for (Task task : tasks) {
-            out.append(gson.toJson(task));
+            ser.add(task);
         }
+        out.append(gson.toJson(ser));
     }
 
-    public static void read(AbstractTaskList tasks, Reader in) {
-        GsonBuilder builder = new GsonBuilder();
-        Gson gson = builder.create();
-        AbstractTaskList readTasks = gson.fromJson(in, (Type) tasks.getClass());
+    public static void read(AbstractTaskList tasks, final Reader in) {
+        com.google.gson.Gson gson = new GsonBuilder()
+                .registerTypeAdapter(LocalDateTime.class, new JsonDeserializer<LocalDateTime>() {
+                    @Override
+                    public LocalDateTime deserialize(
+                            JsonElement json,
+                            Type type,
+                            JsonDeserializationContext jsonDeserializationContext)
+                            throws JsonParseException {
+                        Instant instant = Instant.ofEpochMilli(json.getAsJsonPrimitive().getAsCharacter());
+                        return LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+                    }
+                }).create();
 
-        for (int i = 0; i <= readTasks.getSize(); i++) {
-            tasks.add(readTasks.getTask(i));
+        ArrayList<Task> arr = gson.fromJson(in, new TypeToken<ArrayList<Task>>(){}.getType());
+
+        for (Task task : arr) {
+            tasks.add(task);
         }
+
+        //System.out.println(tasks.toString());
     }
 
     public static void writeText(AbstractTaskList tasks, File file) {
@@ -57,23 +78,24 @@ public class TaskIO {
         }
     }
 
-    public static void writeBinary( AbstractTaskList tasks, File file) {
-        try (BufferedWriter w = new BufferedWriter(new FileWriter(String.valueOf(file)))) {
-            write(tasks, w);
+    public static void writeBinary(final AbstractTaskList tasks, File file) {
+        try (ObjectOutputStream o = new ObjectOutputStream(new FileOutputStream(String.valueOf(file)))) {
+            write(tasks, o);
         } catch (final IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static void readBinary(AbstractTaskList tasks, File file) {
-        try (BufferedReader r = new BufferedReader(new FileReader(String.valueOf(file)))) {
-            read(tasks, r);
-        } catch (final IOException e) {
+    public static void readBinary(AbstractTaskList tasks,final File file) {
+        try (ObjectInputStream i = new ObjectInputStream(new FileInputStream(String.valueOf(file)))) {
+            read(tasks, i);
+        } catch (final IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    public static class TaskSerializer implements JsonSerializer<Task> {
+
+    private static class TaskSerializer implements JsonSerializer<Task> {
         public JsonElement serialize(final Task task, final Type type, final JsonSerializationContext context) {
             JsonObject result = new JsonObject();
             result.add("title", new JsonPrimitive(task.getTitle()));
@@ -87,6 +109,6 @@ public class TaskIO {
             }
             return result;
         }
-    }
 
+    }
 }

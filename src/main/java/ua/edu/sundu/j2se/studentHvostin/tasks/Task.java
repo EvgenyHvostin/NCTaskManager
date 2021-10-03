@@ -1,5 +1,7 @@
 package ua.edu.sundu.j2se.studentHvostin.tasks;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -8,11 +10,17 @@ public class Task implements Cloneable, Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @SerializedName("title")
     private String title;
+    @SerializedName("time")
     private LocalDateTime time;
+    @SerializedName("start")
     private LocalDateTime start;
+    @SerializedName("end")
     private LocalDateTime end;
+    @SerializedName("interval")
     private int interval;
+    @SerializedName("active")
     private boolean active;
 
     public Task (final String title, final LocalDateTime time) {
