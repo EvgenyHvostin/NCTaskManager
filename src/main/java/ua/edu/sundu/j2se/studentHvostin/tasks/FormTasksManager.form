@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="ua.edu.sundu.j2se.studentHvostin.tasks.FormTasksManager">
+  <grid id="27dc6" binding="panelTasks" layout-manager="GridBagLayout">
+    <constraints>
+      <xy x="20" y="20" width="241" height="271"/>
+    </constraints>
+    <properties>
+      <alignmentX value="0.5"/>
+      <alignmentY value="0.5"/>
+      <autoscrolls value="false"/>
+      <foreground color="-4473925"/>
+    </properties>
+    <border type="line"/>
+    <children>
+      <component id="4d63c" class="javax.swing.JButton" binding="buttonAdd">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="1.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <text value="Add task"/>
+        </properties>
+      </component>
+      <component id="3ded6" class="javax.swing.JButton" binding="buttonRemove">
+        <constraints>
+          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="1.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <text value="remove"/>
+        </properties>
+      </component>
+      <component id="74ac8" class="javax.swing.JButton" binding="buttonEdit">
+        <constraints>
+          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="1.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <text value="Edit task"/>
+        </properties>
+      </component>
+      <scrollpane id="135f9">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="3" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <maximumSize width="100" height="60"/>
+          <minimumSize width="100" height="60"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="b25b1" class="javax.swing.JList" binding="listTasks">
+            <constraints/>
+            <properties>
+              <autoscrolls value="true"/>
+              <maximumSize width="100" height="60"/>
+              <minimumSize width="100" height="60"/>
+              <model/>
+              <name value="Tasks"/>
+              <opaque value="false"/>
+              <visibleRowCount value="5"/>
+            </properties>
+          </component>
+        </children>
+      </scrollpane>
+      <component id="7595e" class="javax.swing.JButton" binding="buttonTasks">
+        <constraints>
+          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <text value="Calendar"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+  <inspectionSuppressions>
+    <suppress inspection="NoScrollPane"/>
+    <suppress inspection="NoLabelFor"/>
+  </inspectionSuppressions>
+</form>
