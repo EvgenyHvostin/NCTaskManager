@@ -76,11 +76,11 @@ public class FormTasksManager extends JFrame {
     }
 
     public void calendarList(final LocalDateTime start, final LocalDateTime end) {
-        SortedMap<LocalDateTime, Set<String>> calendar = Tasks.calendar(tasks, start, end);
+        Collection<Set<String>> calendar = Tasks.calendar(tasks, start, end).values();
         DefaultListModel listModel = new DefaultListModel();
-
-        //в процессе
-        listModel.addElement(calendar.values());
+        for (Set i : calendar) {
+            listModel.addElement(i);
+        }
         listTasks.setModel(listModel);
         buttonTasks.setText("Back");
     }
