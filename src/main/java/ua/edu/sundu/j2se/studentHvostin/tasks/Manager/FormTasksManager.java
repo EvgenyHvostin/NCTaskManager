@@ -1,4 +1,9 @@
-package ua.edu.sundu.j2se.studentHvostin.tasks;
+package ua.edu.sundu.j2se.studentHvostin.tasks.Manager;
+
+import ua.edu.sundu.j2se.studentHvostin.tasks.Services.Tasks;
+import ua.edu.sundu.j2se.studentHvostin.tasks.Task;
+import ua.edu.sundu.j2se.studentHvostin.tasks.TaskList.AbstractTaskList;
+import ua.edu.sundu.j2se.studentHvostin.tasks.TaskList.ArrayTaskList;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -78,8 +83,8 @@ public class FormTasksManager extends JFrame {
     public void calendarList(final LocalDateTime start, final LocalDateTime end) {
         Collection<Set<String>> calendar = Tasks.calendar(tasks, start, end).values();
         DefaultListModel listModel = new DefaultListModel();
-        for (Set i : calendar) {
-            listModel.addElement(i);
+        for (Set element : calendar) {
+            listModel.addElement(element);
         }
         listTasks.setModel(listModel);
         buttonTasks.setText("Back");

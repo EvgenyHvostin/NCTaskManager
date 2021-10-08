@@ -1,4 +1,7 @@
-package ua.edu.sundu.j2se.studentHvostin.tasks;
+package ua.edu.sundu.j2se.studentHvostin.tasks.TaskList;
+
+import ua.edu.sundu.j2se.studentHvostin.tasks.Task;
+import ua.edu.sundu.j2se.studentHvostin.tasks.Services.TaskIterator;
 
 import java.io.Serializable;
 import java.util.Iterator;

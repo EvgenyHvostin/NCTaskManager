@@ -1,4 +1,6 @@
-package ua.edu.sundu.j2se.studentHvostin.tasks;
+package ua.edu.sundu.j2se.studentHvostin.tasks.Services;
+
+import ua.edu.sundu.j2se.studentHvostin.tasks.Task;
 
 import java.time.LocalDateTime;
 import java.util.*;

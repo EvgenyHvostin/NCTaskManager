@@ -1,4 +1,4 @@
-package ua.edu.sundu.j2se.studentHvostin.tasks;
+package ua.edu.sundu.j2se.studentHvostin.tasks.Manager;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -24,7 +24,7 @@ public class FormCalendar extends JFrame  {
         this.setVisible(true);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
-        this.setSize(530,300);
+        this.setSize(500,200);
 
         buttonOK.addActionListener(new ActionListener() {
             @Override

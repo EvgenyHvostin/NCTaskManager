@@ -1,7 +1,10 @@
-package ua.edu.sundu.j2se.studentHvostin.tasks;
+package ua.edu.sundu.j2se.studentHvostin.tasks.Services;
 
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
+import ua.edu.sundu.j2se.studentHvostin.tasks.Task;
+import ua.edu.sundu.j2se.studentHvostin.tasks.TaskList.AbstractTaskList;
+
 import java.io.*;
 import java.lang.reflect.Type;
 import java.time.Instant;

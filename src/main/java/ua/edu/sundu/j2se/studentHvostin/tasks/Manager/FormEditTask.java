@@ -1,4 +1,6 @@
-package ua.edu.sundu.j2se.studentHvostin.tasks;
+package ua.edu.sundu.j2se.studentHvostin.tasks.Manager;
+
+import ua.edu.sundu.j2se.studentHvostin.tasks.Task;
 
 import javax.swing.*;
 import java.awt.*;
@@ -77,6 +79,7 @@ public class FormEditTask extends JFrame {
         buttonCancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                f.setVisible(true);
                 dispose();
             }
         });

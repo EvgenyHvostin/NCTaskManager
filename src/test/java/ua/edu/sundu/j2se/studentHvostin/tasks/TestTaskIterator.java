@@ -1,5 +1,6 @@
 package ua.edu.sundu.j2se.studentHvostin.tasks;
 
+import ua.edu.sundu.j2se.studentHvostin.tasks.TaskList.AbstractTaskList;
 import ua.edu.sundu.j2se.studentHvostin.tasks.factory.ListTypes;
 import ua.edu.sundu.j2se.studentHvostin.tasks.factory.TaskListFactory;
 import org.junit.jupiter.api.Assertions;

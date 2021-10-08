@@ -1,6 +1,7 @@
 package ua.edu.sundu.j2se.studentHvostin.tasks;
 
 import org.junit.jupiter.api.Test;
+import ua.edu.sundu.j2se.studentHvostin.tasks.Manager.FormTasksManager;
 
 public class AppTest {
 

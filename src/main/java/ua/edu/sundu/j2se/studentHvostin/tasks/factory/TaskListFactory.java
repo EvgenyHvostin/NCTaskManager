@@ -1,8 +1,8 @@
 package ua.edu.sundu.j2se.studentHvostin.tasks.factory;
 
-import ua.edu.sundu.j2se.studentHvostin.tasks.AbstractTaskList;
-import ua.edu.sundu.j2se.studentHvostin.tasks.ArrayTaskList;
-import ua.edu.sundu.j2se.studentHvostin.tasks.LinkedList;
+import ua.edu.sundu.j2se.studentHvostin.tasks.TaskList.AbstractTaskList;
+import ua.edu.sundu.j2se.studentHvostin.tasks.TaskList.ArrayTaskList;
+import ua.edu.sundu.j2se.studentHvostin.tasks.TaskList.LinkedList;
 
 public class TaskListFactory {
 
