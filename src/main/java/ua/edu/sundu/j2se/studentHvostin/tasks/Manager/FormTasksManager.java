@@ -1,17 +1,21 @@
 package ua.edu.sundu.j2se.studentHvostin.tasks.Manager;
 
+import org.apache.log4j.Logger;
 import ua.edu.sundu.j2se.studentHvostin.tasks.Services.Tasks;
 import ua.edu.sundu.j2se.studentHvostin.tasks.Task;
 import ua.edu.sundu.j2se.studentHvostin.tasks.TaskList.AbstractTaskList;
 import ua.edu.sundu.j2se.studentHvostin.tasks.TaskList.ArrayTaskList;
 
 import javax.swing.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.time.LocalDateTime;
-import java.util.*;
-import javax.swing.JFrame;
+import java.util.Collection;
+import java.util.Set;
 
 public class FormTasksManager extends JFrame {
+
+    static Logger log = Logger.getLogger(FormTasksManager.class.getName());
 
     private JPanel panelTasks;
     private JButton buttonAdd;
@@ -24,7 +28,6 @@ public class FormTasksManager extends JFrame {
 
     public FormTasksManager() {
         FormTasksManager mainForm = this;
-
         this.add(this.panelTasks);
         this.setVisible(true);
         this.setLocationRelativeTo(null);
@@ -34,6 +37,7 @@ public class FormTasksManager extends JFrame {
         this.buttonAdd.addActionListener(new ActionListener()  {
             @Override
             public void actionPerformed(ActionEvent e)  {
+                log.info("Add task");
                 tasks.add(new Task("New task", LocalDateTime.now()));
                 new FormEditTask(tasks.getTask(tasks.getSize() - 1), mainForm);
                 setVisible(false);
@@ -43,6 +47,7 @@ public class FormTasksManager extends JFrame {
         this.buttonEdit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                log.info("Edit task");
                 int index = listTasks.getSelectedIndex();
                 new FormEditTask(tasks.getTask(index), mainForm);
             }
@@ -51,6 +56,7 @@ public class FormTasksManager extends JFrame {
         this.buttonRemove.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                log.info("Remove task");
                 if (listTasks.getSelectedIndex() == -1) listTasks.setSelectedIndex(0);
                 tasks.remove(tasks.getTask(listTasks.getSelectedIndex()));
                 DefaultListModel listModel = (DefaultListModel) listTasks.getModel();
@@ -65,6 +71,7 @@ public class FormTasksManager extends JFrame {
                     buttonTasks.setText("Calendar");
                     updateList();
                 } else {
+                    log.info("Open calendar tasks");
                     new FormCalendar(mainForm) ;
                     setVisible(false);
                 }

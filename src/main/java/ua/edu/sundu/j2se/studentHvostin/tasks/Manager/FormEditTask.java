@@ -3,9 +3,8 @@ package ua.edu.sundu.j2se.studentHvostin.tasks.Manager;
 import ua.edu.sundu.j2se.studentHvostin.tasks.Task;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.JFrame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.time.LocalDateTime;
 
 public class FormEditTask extends JFrame {
