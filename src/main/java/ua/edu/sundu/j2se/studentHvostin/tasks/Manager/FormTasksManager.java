@@ -93,6 +93,7 @@ public class FormTasksManager extends JFrame {
                 jFileChooser.showOpenDialog(panelTasks);
                 jFileChooser.setCurrentDirectory(new File("."));
                 tasks.openFile(jFileChooser.getSelectedFile());
+                updateList();
             }
         });
     }

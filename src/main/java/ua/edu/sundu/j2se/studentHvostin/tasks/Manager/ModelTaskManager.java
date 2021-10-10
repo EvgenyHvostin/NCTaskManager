@@ -24,27 +24,27 @@ public class ModelTaskManager {
         return list;
     }
 
-    public Task getTask(int index) {
+    public Task getTask(final int index) {
         return list.getTask(index);
     }
 
-    public void addTask(Task task) {
+    public void addTask(final Task task) {
         list.add(task);
     }
 
-    public void removeTask(int index) {
+    public void removeTask(final int index) {
         list.remove(list.getTask(index));
     }
 
-    public void removeTask(Task task) {
+    public void removeTask(final Task task) {
         list.remove(task);
     }
 
-    public void editTask(int index, boolean active, String title,
-                         LocalDateTime start, LocalDateTime end,
-                         int interval) {
+    public void editTask(final int index,final  boolean active,final  String title,
+                         final LocalDateTime start,final  LocalDateTime end,
+                         final int interval) {
 
-        Task task = list.getTask(index);
+        Task task = this.list.getTask(index);
         task.setTitle(title);
         task.setActive(active);
         if (interval == 0) {
@@ -54,9 +54,9 @@ public class ModelTaskManager {
         }
     }
 
-    public ArrayList<String> calendar(LocalDateTime start,LocalDateTime end) {
+    public ArrayList<String> calendar(final LocalDateTime start, final LocalDateTime end) {
         ArrayList<String> allElements = new ArrayList<String>();
-        SortedMap<LocalDateTime, Set<String>> map = Tasks.calendar(list, start, end);
+        //SortedMap<LocalDateTime, Set<String>> map = Tasks.calendar(list, start, end);
         Iterator<Map.Entry<LocalDateTime, Set<String>>> it = Tasks.calendar(list, start, end).entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry<LocalDateTime, Set<String>> pairs = it.next();
@@ -69,7 +69,7 @@ public class ModelTaskManager {
         TaskIO.writeBinary(this.list, file);
     }
 
-    public void openFile(File file) {
+    public void openFile(final File file) {
         TaskIO.readBinary(this.list, file);
     }
 

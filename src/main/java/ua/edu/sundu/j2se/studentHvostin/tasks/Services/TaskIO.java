@@ -51,13 +51,13 @@ public class TaskIO {
                 .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeSerializer())
                 .setPrettyPrinting()
                 .create();
-        gson.fromJson(in, new TypeToken<ArrayList<Task>>(){}.getType());
-        //for (Task task : deSer) {
-           // tasks.add(deSer);
-        //}
+        ArrayList<Task> read = gson.fromJson(in, new TypeToken<ArrayList<Task>>(){}.getType());
+        for (Task task : read) {
+            tasks.add(task);
+        }
     }
 
-    public static void writeText(AbstractTaskList tasks, File file) {
+    public static void writeText(final AbstractTaskList tasks, File file) {
         try (BufferedWriter w = new BufferedWriter(new FileWriter(String.valueOf(file)))) {
             write(tasks, w);
         } catch (final IOException e) {
@@ -65,7 +65,7 @@ public class TaskIO {
         }
     }
 
-    public static void readText(AbstractTaskList tasks, File file) {
+    public static void readText(AbstractTaskList tasks,final File file) {
         try (BufferedReader r = new BufferedReader(new FileReader(String.valueOf(file)))) {
             read(tasks, r);
         } catch (final IOException e) {
@@ -81,7 +81,7 @@ public class TaskIO {
         }
     }
 
-    public static void readBinary(AbstractTaskList tasks,final File file) {
+    public static void readBinary(AbstractTaskList tasks, final File file) {
         try (ObjectInputStream i = new ObjectInputStream(new FileInputStream(String.valueOf(file)))) {
             read(tasks, i);
         } catch (final IOException | ClassNotFoundException e) {
