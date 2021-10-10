@@ -65,12 +65,12 @@ public class ModelTaskManager {
         return allElements;
     }
 
-    public void save() {
-        TaskIO.writeBinary(this.list, this.file);
+    public void saveFile(File file) {
+        TaskIO.writeBinary(this.list, file);
     }
 
-    public void open() {
-        TaskIO.readBinary(this.list, this.file);
+    public void openFile(File file) {
+        TaskIO.readBinary(this.list, file);
     }
 
     public File getFile() {

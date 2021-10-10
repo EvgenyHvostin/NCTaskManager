@@ -5,6 +5,7 @@ import ua.edu.sundu.j2se.studentHvostin.tasks.Task;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.time.LocalDateTime;
 
 public class FormTasksManager extends JFrame {
@@ -17,6 +18,8 @@ public class FormTasksManager extends JFrame {
     private JButton buttonEdit;
     private JButton buttonTasks;
     private JList listTasks;
+    private JButton buttonSave;
+    private JButton buttonOpen;
 
     ModelTaskManager tasks = new ModelTaskManager();
 
@@ -70,6 +73,26 @@ public class FormTasksManager extends JFrame {
                     new FormCalendar(mainForm) ;
                     setVisible(false);
                 }
+            }
+        });
+
+        buttonSave.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser jFileChooser = new JFileChooser();
+                jFileChooser.showOpenDialog(panelTasks);
+                jFileChooser.setCurrentDirectory(new File("."));
+                tasks.saveFile(jFileChooser.getSelectedFile());
+            }
+        });
+
+        buttonOpen.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser jFileChooser = new JFileChooser();
+                jFileChooser.showSaveDialog(panelTasks);
+                jFileChooser.setCurrentDirectory(new File("."));
+                tasks.openFile(jFileChooser.getSelectedFile());
             }
         });
     }
