@@ -4,13 +4,12 @@ import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import ua.edu.sundu.j2se.studentHvostin.tasks.Task;
 import ua.edu.sundu.j2se.studentHvostin.tasks.TaskList.AbstractTaskList;
-
 import java.io.*;
 import java.lang.reflect.Type;
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class TaskIO {
 
@@ -31,38 +30,31 @@ public class TaskIO {
 
     public static void write(final AbstractTaskList tasks, Writer out) throws IOException {
         com.google.gson.Gson gson = new GsonBuilder()
-                .registerTypeAdapter(Task.class, new TaskSerializer()).create();
+                //.registerTypeAdapter(Task.class, new TaskSerializer())
+                .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeSerializer())
+                .setPrettyPrinting()
+                .create();
 
-        //out.append(gson.toJson(tasks.getTask(0)));
         ArrayList<Task> ser = new ArrayList<>();
 
         for (Task task : tasks) {
+
             ser.add(task);
         }
         out.append(gson.toJson(ser));
+        //out.append(gson.toJson(ser));
     }
 
-    public static void read(AbstractTaskList tasks, final Reader in) {
+    public static void read(AbstractTaskList tasks, final Reader in) throws IOException {
         com.google.gson.Gson gson = new GsonBuilder()
-                .registerTypeAdapter(LocalDateTime.class, new JsonDeserializer<LocalDateTime>() {
-                    @Override
-                    public LocalDateTime deserialize(
-                            JsonElement json,
-                            Type type,
-                            JsonDeserializationContext jsonDeserializationContext)
-                            throws JsonParseException {
-                        Instant instant = Instant.ofEpochMilli(json.getAsJsonPrimitive().getAsCharacter());
-                        return LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
-                    }
-                }).create();
-
-        ArrayList<Task> arr = gson.fromJson(in, new TypeToken<ArrayList<Task>>(){}.getType());
-
-        for (Task task : arr) {
-            tasks.add(task);
-        }
-
-        //System.out.println(tasks.toString());
+             //   .registerTypeAdapter(Task.class, new TaskDeserializer())
+                .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeSerializer())
+                .setPrettyPrinting()
+                .create();
+        gson.fromJson(in, new TypeToken<ArrayList<Task>>(){}.getType());
+        //for (Task task : deSer) {
+           // tasks.add(deSer);
+        //}
     }
 
     public static void writeText(AbstractTaskList tasks, File file) {
@@ -97,21 +89,51 @@ public class TaskIO {
         }
     }
 
-
     private static class TaskSerializer implements JsonSerializer<Task> {
+        @Override
         public JsonElement serialize(final Task task, final Type type, final JsonSerializationContext context) {
             JsonObject result = new JsonObject();
             result.add("title", new JsonPrimitive(task.getTitle()));
             result.add("activity", new JsonPrimitive(task.isActive()));
             result.add("repetition", new JsonPrimitive(task.getRepeatInterval()));
             if (task.isRepeated()) {
-                result.add("start", new JsonPrimitive(String.valueOf(task.getStartTime())));
-                result.add("end", new JsonPrimitive(task.getEndTime().toString()));
+                result.add("start",new JsonPrimitive(String.valueOf(task.getStartTime())));
+                result.add("end", new JsonPrimitive(String.valueOf(task.getEndTime())));
             } else {
                 result.add("time", new JsonPrimitive(task.getTime().toString()));
             }
             return result;
         }
-
     }
+/*
+    private static class TaskDeserializer implements JsonDeserializer<Task> {
+        @Override
+        public Task deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+            Task task = new Task();
+
+
+
+            return task;
+        }
+    }
+ */
+    private static class LocalDateTimeSerializer implements JsonSerializer < LocalDateTime > {
+        private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d::MMM::uuuu HH::mm::ss");
+        @Override
+        public JsonElement serialize(LocalDateTime localDateTime, Type srcType, JsonSerializationContext context) {
+            return new JsonPrimitive(formatter.format(localDateTime));
+        }
+    }
+
+    private static class LocalDateTimeDeserializer implements JsonDeserializer < LocalDateTime > {
+        @Override
+        public LocalDateTime deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+                throws JsonParseException {
+            return LocalDateTime.parse(json.getAsString(),
+                    DateTimeFormatter.ofPattern("d::MMM::uuuu HH::mm::ss").withLocale(Locale.ENGLISH));
+        }
+    }
+
+
+
 }

@@ -1,17 +1,11 @@
 package ua.edu.sundu.j2se.studentHvostin.tasks.Manager;
 
 import org.apache.log4j.Logger;
-import ua.edu.sundu.j2se.studentHvostin.tasks.Services.Tasks;
 import ua.edu.sundu.j2se.studentHvostin.tasks.Task;
-import ua.edu.sundu.j2se.studentHvostin.tasks.TaskList.AbstractTaskList;
-import ua.edu.sundu.j2se.studentHvostin.tasks.TaskList.ArrayTaskList;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.Set;
 
 public class FormTasksManager extends JFrame {
 
@@ -24,10 +18,11 @@ public class FormTasksManager extends JFrame {
     private JButton buttonTasks;
     private JList listTasks;
 
-    private AbstractTaskList tasks = new ArrayTaskList();
+    ModelTaskManager tasks = new ModelTaskManager();
 
     public FormTasksManager() {
         FormTasksManager mainForm = this;
+
         this.add(this.panelTasks);
         this.setVisible(true);
         this.setLocationRelativeTo(null);
@@ -38,8 +33,8 @@ public class FormTasksManager extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e)  {
                 log.info("Add task");
-                tasks.add(new Task("New task", LocalDateTime.now()));
-                new FormEditTask(tasks.getTask(tasks.getSize() - 1), mainForm);
+                tasks.addTask(new Task("New task", LocalDateTime.now()));
+                new FormEditTask(listTasks.getLastVisibleIndex() + 1, mainForm);
                 setVisible(false);
             }
         });
@@ -48,8 +43,8 @@ public class FormTasksManager extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 log.info("Edit task");
-                int index = listTasks.getSelectedIndex();
-                new FormEditTask(tasks.getTask(index), mainForm);
+                if (listTasks.getSelectedIndex() == -1) listTasks.setSelectedIndex(0);
+                new FormEditTask(listTasks.getSelectedIndex(), mainForm);
             }
         });
 
@@ -58,7 +53,7 @@ public class FormTasksManager extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 log.info("Remove task");
                 if (listTasks.getSelectedIndex() == -1) listTasks.setSelectedIndex(0);
-                tasks.remove(tasks.getTask(listTasks.getSelectedIndex()));
+                tasks.removeTask(listTasks.getSelectedIndex());
                 DefaultListModel listModel = (DefaultListModel) listTasks.getModel();
                 listModel.remove(listTasks.getSelectedIndex());
             }
@@ -81,16 +76,15 @@ public class FormTasksManager extends JFrame {
 
     public void updateList() {
         DefaultListModel listModel = new DefaultListModel();
-        for (Task task : tasks) {
+        for (Task task : tasks.getList()) {
             listModel.addElement(task.nextTimeAfter(LocalDateTime.now()) + "  " + task.getTitle());
         }
         listTasks.setModel(listModel);
     }
 
-    public void calendarList(final LocalDateTime start, final LocalDateTime end) {
-        Collection<Set<String>> calendar = Tasks.calendar(tasks, start, end).values();
+    public void calendar(final LocalDateTime start, final LocalDateTime end) {
         DefaultListModel listModel = new DefaultListModel();
-        for (Set element : calendar) {
+        for (String element : tasks.calendar(start, end)) {
             listModel.addElement(element);
         }
         listTasks.setModel(listModel);

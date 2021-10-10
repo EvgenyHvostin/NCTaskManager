@@ -28,8 +28,8 @@ public class TestTaskIO {
 
         Assertions.assertEquals(newBinaryTasks.toString(), tasks.toString());
 
-        TaskIO.writeText(tasks, file);
-        TaskIO.readText(newTextTasks, file);
+        //TaskIO.writeText(tasks, file);
+        //TaskIO.readText(newTextTasks, file);
 
         //Assertions.assertEquals(newTextTasks.toString(), tasks.toString());
 

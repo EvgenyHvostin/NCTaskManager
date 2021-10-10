@@ -1,1 +1,14 @@
-[{"title":"task0","activity":false,"repetition":0,"time":"0001-01-01T01:01"},{"title":"task0","activity":false,"repetition":0,"time":"0001-01-01T01:01"}]
+[
+  {
+    "title": "task0",
+    "time": "1::янв.::0001 01::01::00",
+    "interval": 0,
+    "active": false
+  },
+  {
+    "title": "task0",
+    "time": "1::янв.::0001 01::01::00",
+    "interval": 0,
+    "active": false
+  }
+]

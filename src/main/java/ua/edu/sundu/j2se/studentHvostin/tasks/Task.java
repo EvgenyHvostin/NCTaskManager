@@ -182,7 +182,7 @@ public class Task implements Cloneable, Serializable {
         return result + ")";
     }
 
-    private Task () {}
+    public Task() {}
 
     @Override
     public Task clone() {

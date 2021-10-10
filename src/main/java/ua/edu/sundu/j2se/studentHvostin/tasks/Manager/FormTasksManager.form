@@ -2,7 +2,7 @@
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="ua.edu.sundu.j2se.studentHvostin.tasks.Manager.FormTasksManager">
   <grid id="27dc6" binding="panelTasks" layout-manager="GridBagLayout">
     <constraints>
-      <xy x="20" y="20" width="241" height="271"/>
+      <xy x="20" y="20" width="241" height="122"/>
     </constraints>
     <properties>
       <alignmentX value="0.5"/>

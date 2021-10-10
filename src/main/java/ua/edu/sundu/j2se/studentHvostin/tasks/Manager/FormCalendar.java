@@ -41,7 +41,7 @@ public class FormCalendar extends JFrame  {
                 hour = Integer.parseInt((String) comboBoxHour2.getSelectedItem());
                 LocalDateTime end = LocalDateTime.of(year, month, day, hour, 0);
 
-                mainForm.calendarList(start, end);
+                mainForm.calendar(start, end);
                 mainForm.setVisible(true);
                 dispose();
             }
