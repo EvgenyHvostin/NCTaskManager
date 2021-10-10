@@ -80,7 +80,7 @@ public class FormTasksManager extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFileChooser jFileChooser = new JFileChooser();
-                jFileChooser.showOpenDialog(panelTasks);
+                jFileChooser.showSaveDialog(panelTasks);
                 jFileChooser.setCurrentDirectory(new File("."));
                 tasks.saveFile(jFileChooser.getSelectedFile());
             }
@@ -90,7 +90,7 @@ public class FormTasksManager extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFileChooser jFileChooser = new JFileChooser();
-                jFileChooser.showSaveDialog(panelTasks);
+                jFileChooser.showOpenDialog(panelTasks);
                 jFileChooser.setCurrentDirectory(new File("."));
                 tasks.openFile(jFileChooser.getSelectedFile());
             }
