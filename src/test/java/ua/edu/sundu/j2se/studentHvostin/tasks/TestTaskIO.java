@@ -6,7 +6,8 @@ import ua.edu.sundu.j2se.studentHvostin.tasks.Services.TaskIO;
 import ua.edu.sundu.j2se.studentHvostin.tasks.TaskList.AbstractTaskList;
 import ua.edu.sundu.j2se.studentHvostin.tasks.TaskList.ArrayTaskList;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
 
 public class TestTaskIO {
@@ -17,7 +18,7 @@ public class TestTaskIO {
         AbstractTaskList tasks = new ArrayTaskList();
         AbstractTaskList newBinaryTasks = new ArrayTaskList();
         AbstractTaskList newTextTasks = new ArrayTaskList();
-        File file = new File("testTaskIO.out");
+        File file = new File("testTaskIO.json");
         Task task = new Task("task0", LocalDateTime.of(1,1,1,1,1));
 
         tasks.add(task);
@@ -28,10 +29,11 @@ public class TestTaskIO {
 
         Assertions.assertEquals(newBinaryTasks.toString(), tasks.toString());
 
-        //TaskIO.writeText(tasks, file);
-        //TaskIO.readText(newTextTasks, file);
+        TaskIO.writeText(tasks, file);
+        TaskIO.readText(newTextTasks, file);
 
-        //Assertions.assertEquals(newTextTasks.toString(), tasks.toString());
+        //System.out.print(newTextTasks);
+        Assertions.assertEquals(newTextTasks.toString(), tasks.toString());
 
     }
 }

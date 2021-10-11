@@ -30,12 +30,13 @@ public class TaskIO {
 
     public static void write(final AbstractTaskList tasks, Writer out) throws IOException {
         com.google.gson.Gson gson = new GsonBuilder()
-                //.registerTypeAdapter(Task.class, new TaskSerializer())
-                .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeSerializer())
+                //.registerTypeAdapter(Task.class, new TaskAdapter())
+                //.registerTypeAdapter(String.class, new String())
+                .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
                 .setPrettyPrinting()
                 .create();
 
-        ArrayList<Task> ser = new ArrayList<>();
+        ArrayList<Task> ser = new ArrayList<Task>();
 
         for (Task task : tasks) {
 
@@ -47,8 +48,8 @@ public class TaskIO {
 
     public static void read(AbstractTaskList tasks, final Reader in) throws IOException {
         com.google.gson.Gson gson = new GsonBuilder()
-             //   .registerTypeAdapter(Task.class, new TaskDeserializer())
-                .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeSerializer())
+                //.registerTypeAdapter(Task.class, new TaskAdapter())
+                .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
                 .setPrettyPrinting()
                 .create();
         ArrayList<Task> read = gson.fromJson(in, new TypeToken<ArrayList<Task>>(){}.getType());
@@ -88,7 +89,7 @@ public class TaskIO {
             e.printStackTrace();
         }
     }
-
+/*
     private static class TaskSerializer implements JsonSerializer<Task> {
         @Override
         public JsonElement serialize(final Task task, final Type type, final JsonSerializationContext context) {
@@ -105,35 +106,48 @@ public class TaskIO {
             return result;
         }
     }
-/*
-    private static class TaskDeserializer implements JsonDeserializer<Task> {
+
+
+    private static class TaskAdapter implements JsonDeserializer <Task> {
+
         @Override
-        public Task deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+        public Task deserialize(JsonElement jsonElement, Type type,
+                                JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
             Task task = new Task();
 
+            JsonObject jsonObject = jsonElement.getAsJsonObject();
+            JsonPrimitive title = (JsonPrimitive) jsonObject.get("title");
+            JsonPrimitive interval = (JsonPrimitive) jsonObject.get("interval");
+            JsonPrimitive time = (JsonPrimitive) jsonObject.get("time");
+            task.setTitle(title.getAsString());
+            task.setTime(LocalDateTime.parse(time.getAsString(),
+                    DateTimeFormatter.ISO_DATE_TIME.withLocale(Locale.ENGLISH)));
 
+            //prim = (JsonPrimitive) jsonObject.get("interval");
+            if (interval == null) {
 
+            } else {
+
+            }
             return task;
         }
     }
  */
-    private static class LocalDateTimeSerializer implements JsonSerializer < LocalDateTime > {
-        private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d::MMM::uuuu HH::mm::ss");
+    private static class LocalDateTimeAdapter
+            implements JsonSerializer <LocalDateTime>, JsonDeserializer <LocalDateTime> {
+
+        private final DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
         @Override
         public JsonElement serialize(LocalDateTime localDateTime, Type srcType, JsonSerializationContext context) {
             return new JsonPrimitive(formatter.format(localDateTime));
         }
-    }
 
-    private static class LocalDateTimeDeserializer implements JsonDeserializer < LocalDateTime > {
         @Override
         public LocalDateTime deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
                 throws JsonParseException {
             return LocalDateTime.parse(json.getAsString(),
-                    DateTimeFormatter.ofPattern("d::MMM::uuuu HH::mm::ss").withLocale(Locale.ENGLISH));
+                    DateTimeFormatter.ISO_DATE_TIME.withLocale(Locale.ENGLISH));
         }
     }
-
-
 
 }
