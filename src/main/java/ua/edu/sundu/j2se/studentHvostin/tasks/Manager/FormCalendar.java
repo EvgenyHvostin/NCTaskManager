@@ -22,9 +22,10 @@ public class FormCalendar extends JFrame  {
     public FormCalendar(FormTasksManager mainForm) {
         this.add(this.panelCalendar);
         this.setVisible(true);
-        this.setResizable(false);
+        //this.setResizable(false);
         this.setLocationRelativeTo(null);
-        this.setSize(500,200);
+        this.setSize(375,175);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         buttonOK.addActionListener(new ActionListener() {
             @Override

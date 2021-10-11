@@ -28,9 +28,10 @@ public class FormEditTask extends JFrame {
 
         this.add(this.panalEdit);
         this.setVisible(true);
-        this.setResizable(false);
+        //this.setResizable(false);
         this.setLocationRelativeTo(null);
-        this.setSize(530,300);
+        this.setSize(380,200);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         Task task = mainForm.tasks.getTask(index);
 
