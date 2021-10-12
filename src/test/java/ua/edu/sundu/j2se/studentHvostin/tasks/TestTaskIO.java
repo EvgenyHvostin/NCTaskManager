@@ -32,7 +32,8 @@ public class TestTaskIO {
         TaskIO.writeText(tasks, file);
         TaskIO.readText(newTextTasks, file);
 
-        //System.out.print(newTextTasks);
+        //System.out.println(newTextTasks);
+        //System.out.println(tasks);
         Assertions.assertEquals(newTextTasks.toString(), tasks.toString());
 
     }
